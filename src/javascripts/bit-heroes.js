@@ -19,24 +19,24 @@ function cleanTableHead(th) {
 }
 
 const sortTableRow = (event) => {
-  const { id } = event.target
+  const { id } = event.currentTarget
   let rows = []
 
   if (id === 'power' || id === 'stamina' || id === 'agility') {
     rows = Array.from($$('tbody tr'))
-      .sort((a, b) => b.children[event.target.cellIndex].textContent - a.children[event.target.cellIndex].textContent)
+      .sort((a, b) => b.children[event.currentTarget.cellIndex].textContent - a.children[event.currentTarget.cellIndex].textContent)
   }
   else {
     rows = Array.from($$('tbody tr'))
       .sort((a, b) => {
-        const a1 = a.children[event.target.cellIndex].textContent.normalize('NFD').replace(/[\u0300-\u036f| |']/g, '')
-        const b1 = b.children[event.target.cellIndex].textContent.normalize('NFD').replace(/[\u0300-\u036f| |']/g, '')
+        const a1 = a.children[event.currentTarget.cellIndex].textContent.normalize('NFD').replace(/[\u0300-\u036f| |']/g, '')
+        const b1 = b.children[event.currentTarget.cellIndex].textContent.normalize('NFD').replace(/[\u0300-\u036f| |']/g, '')
         if (a1 < b1) return -1
         if (a1 > b1) return 1
         return 0
       })
   }
-  if (event.target.classList.contains('desc')) {
+  if (event.currentTarget.classList.contains('desc')) {
     rows.reverse()
   }
 
@@ -49,9 +49,9 @@ const sortTableRow = (event) => {
 
 const selectRows = (event) => {
   $$('tbody tr').forEach((tr) => {
-    const columnId = event.target.dataset.column
+    const columnId = event.currentTarget.dataset.column
     let content = tr.children[columnId].textContent
-    let selectValue = event.target.value
+    let selectValue = event.currentTarget.value
 
     // Concat all Spells.
     if (columnId === '6') {
@@ -62,13 +62,13 @@ const selectRows = (event) => {
     }
 
     if (columnId === '11') {
-      selectValue = `% ${event.target.value}$`
+      selectValue = `% ${event.currentTarget.value}$`
     }
     else if (columnId === '12') {
-      selectValue = ` ${event.target.value}\\W`
+      selectValue = ` ${event.currentTarget.value}\\W`
     }
 
-    if (content.match(new RegExp(selectValue, 'g')) || event.target.value === 'all') {
+    if (content.match(new RegExp(selectValue, 'g')) || event.currentTarget.value === 'all') {
       tr.classList.remove('invisible')
     }
     else {
