@@ -13,6 +13,18 @@ const select = (data, index) => data.reduce((accumulator, element) => {
   return accumulator
 }, [])
 
+const selectpassiveAbility = data => data.reduce((accumulator, element) => {
+  element.passiveAbility.forEach((passiveAbility) => {
+    const text = passiveAbility.ability.replace(/[0-9.%]*/, '')
+
+    if (accumulator.every(type => type !== text)) {
+      accumulator.push(text)
+    }
+  })
+
+  return accumulator
+}, [])
+
 const selectSpells = data => data.reduce((accumulator, element) => {
   if (accumulator.every(type => type !== element.spell1.action)) {
     accumulator.push(element.spell1.action)
@@ -41,6 +53,15 @@ const selectFusions = data => data.reduce((accumulator, element) => {
     'Jumbo Syrum',
     'Mini Syrum',
     'Robot Sprocket',
+    "Hobbit's Foot",
+    'Demon Juice',
+    'Wet Brainz',
+    'Ninja Powah',
+    'Ginger Snaps',
+    'Jelly Donut',
+    'Ectoplasm',
+    'Demon Hide',
+    'Bacon',
     'Gold',
   ]
 
@@ -61,7 +82,7 @@ const displayFamiliars = async (request, response, page) => {
       response.locals.selectType = select(data, 'type')
 
       if (page === 'fusions') {
-        response.locals.selectPassiveAbility = select(data, 'passiveAbility').sort()
+        response.locals.selectPassiveAbility = selectpassiveAbility(data).sort()
         response.locals.selectFusion = selectFusions(data).sort()
       }
 

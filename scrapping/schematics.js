@@ -47,6 +47,5 @@ export const scrapping = async (html) => {
     return familiar
   })
 
-  // console.log(familiars)
   fs.promises.writeFile('data/fusions.json', JSON.stringify(await Promise.all(familiars)), 'utf8')
 }

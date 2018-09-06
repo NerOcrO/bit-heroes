@@ -62,13 +62,13 @@ const selectRows = (event) => {
     }
 
     if (columnId === '11') {
-      selectValue = `% ${event.currentTarget.value}$`
+      selectValue = `% ${event.currentTarget.value}`
     }
     else if (columnId === '12') {
       selectValue = ` ${event.currentTarget.value}\\W`
     }
 
-    if (content.match(new RegExp(selectValue, 'g')) || event.currentTarget.value === 'all') {
+    if (content.trim().match(new RegExp(selectValue, 'g')) || event.currentTarget.value === 'all') {
       tr.classList.remove('invisible')
     }
     else {

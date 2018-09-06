@@ -19,34 +19,58 @@
   </thead>
   <tbody>
     <% for (let i = 0; i < locals.data.length; i++) { %>
-      <tr id="<%= locals.data[i].name.replace(/ /g, '') %>" class="<%= locals.data[i].type.toLowerCase() %>">
-        <td><img src="<%= locals.data[i].avatar %>" alt=""></td>
-        <td><%= locals.data[i].type %></td>
-        <td><%= locals.data[i].name %></td>
-        <td><%= locals.data[i].power %></td>
-        <td><%= locals.data[i].stamina %></td>
-        <td><%= locals.data[i].agility %></td>
-        <td><%= locals.data[i].spell1.name %><br><%= locals.data[i].spell1.action %><br><%= locals.data[i].spell1.pourcentage %></td>
-        <td><%= locals.data[i].spell2.name %><br><%= locals.data[i].spell2.action %><br><%= locals.data[i].spell2.pourcentage %></td>
-        <td><%= locals.data[i].spell3.name %><br><%= locals.data[i].spell3.action %><br><%= locals.data[i].spell3.pourcentage %></td>
-        <td><%= locals.data[i].spell4.name %><br><%= locals.data[i].spell4.action %><br><%= locals.data[i].spell4.pourcentage %></td>
-        <td><%= locals.data[i].spell5.name %><br><%= locals.data[i].spell5.action %><br><%= locals.data[i].spell5.pourcentage %></td>
-        <td><%= locals.data[i].passiveAbility %></td>
-        <td>
-          <% for (let j = 0; j < locals.data[i].fusion.length; j++) { %>
-            <% if (
-              locals.data[i].fusion[j].name.includes('Gold')
-              || locals.data[i].fusion[j].name.includes('Material')
-              || locals.data[i].fusion[j].name.includes('Sprocket')
-              || locals.data[i].fusion[j].name.includes('Syrum')
-              ) { %>
-              <%= locals.data[i].fusion[j].count %> <%= locals.data[i].fusion[j].name %><br>
-            <% } else { %>
-              <%= locals.data[i].fusion[j].count %> <a href="/familiars#<%= locals.data[i].fusion[j].name.replace(/ /g, '') %>"><%= locals.data[i].fusion[j].name %></a><br>
-            <% } %>
+    <tr id="<%= locals.data[i].name.replace(/ /g, '') %>" class="<%= locals.data[i].type.toLowerCase() %>">
+      <td><img src="<%= locals.data[i].avatar %>" alt=""></td>
+      <td><%= locals.data[i].type %></td>
+      <td><%= locals.data[i].name %></td>
+      <td><%= locals.data[i].power %></td>
+      <td><%= locals.data[i].stamina %></td>
+      <td><%= locals.data[i].agility %></td>
+      <td><%= locals.data[i].spell1.name %><br><%= locals.data[i].spell1.action %><br><%= locals.data[i].spell1.pourcentage %></td>
+      <td><%= locals.data[i].spell2.name %><br><%= locals.data[i].spell2.action %><br><%= locals.data[i].spell2.pourcentage %></td>
+      <td><%= locals.data[i].spell3.name %><br><%= locals.data[i].spell3.action %><br><%= locals.data[i].spell3.pourcentage %></td>
+      <td><%= locals.data[i].spell4.name %><br><%= locals.data[i].spell4.action %><br><%= locals.data[i].spell4.pourcentage %></td>
+      <td><%= locals.data[i].spell5.name %><br><%= locals.data[i].spell5.action %><br><%= locals.data[i].spell5.pourcentage %></td>
+      <td>
+        <ul>
+          <% for (let j = 0; j < locals.data[i].passiveAbility.length; j++) { %>
+            <li><%= locals.data[i].passiveAbility[j].pourcentage %> <%= locals.data[i].passiveAbility[j].ability %></li>
           <% } %>
-        </td>
-      </tr>
+        </ul>
+      </td>
+      <td>
+        <ul>
+        <% for (let j = 0; j < locals.data[i].fusion.length; j++) { %>
+          <% if (
+            locals.data[i].fusion[j].name.includes('Gold')
+            || locals.data[i].fusion[j].name.includes('Material')
+            || locals.data[i].fusion[j].name.includes('Sprocket')
+            || locals.data[i].fusion[j].name.includes('Syrum')
+            || locals.data[i].fusion[j].name.includes("Hobbit's Foot")
+            || locals.data[i].fusion[j].name.includes('Demon Juice')
+            || locals.data[i].fusion[j].name.includes('Wet Brainz')
+            || locals.data[i].fusion[j].name.includes('Ninja Powah')
+            || locals.data[i].fusion[j].name.includes('Ginger Snaps')
+            || locals.data[i].fusion[j].name.includes('Jelly Donut')
+            || locals.data[i].fusion[j].name.includes('Ectoplasm')
+            || locals.data[i].fusion[j].name.includes('Demon Hide')
+            || locals.data[i].fusion[j].name.includes('Bacon')
+            ) { %>
+          <li><%= locals.data[i].fusion[j].count %> <%= locals.data[i].fusion[j].name %></li>
+          <% }
+          else
+          {
+            const name = locals.data[i].fusion[j].name
+            let url = 'familiars'
+            if (locals.data.find(data => data.name === name)) {
+              url = 'fusions'
+            } %>
+          <li><%= locals.data[i].fusion[j].count %> <a href="/<%= url %>#<%= locals.data[i].fusion[j].name.replace(/ /g, '') %>"><%= locals.data[i].fusion[j].name %></a></li>
+          <% } %>
+        <% } %>
+        </ul>
+      </td>
+    </tr>
     <% } %>
   </tbody>
   <tfoot>

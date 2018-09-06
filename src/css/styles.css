@@ -1,6 +1,10 @@
 body {
   background-color: #9fa9b5;
 }
+ul {
+  margin: 0;
+  padding-left: 10px;
+}
 #backToTop {
   position: absolute;
   top: 0;
@@ -80,7 +84,7 @@ th {
 th:hover {
   background-color: #f18829;
 }
-tr:nth-child(even) {
+tr:hover {
   background-color: #b8c2cf;
 }
 th:nth-child(2),

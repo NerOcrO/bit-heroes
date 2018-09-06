@@ -8,16 +8,14 @@ export const scrapping = async (html) => {
   const $ = cheerio.load(html)
   $('table tr.epic').remove()
   $('table tr.legendary').remove()
-  const common = $('table.common tr')
-  const rare = $('table.rare tr')
-  const epic = $('table.epic tr')
-  const legendary = $('table.legendary tr')
   const familiars = []
-  const setFamiliars = (table, type) => {
+  const setFamiliars = (table) => {
     for (let index = 1; index < table.length; index += 3) {
       const firstRow = $(table[index])
       const secondRow = $(table[index + 1])
       const thirdRow = $(table[index + 2])
+      const classType = firstRow.find('td').attr('class')
+      const type = classType.charAt(0).toUpperCase() + classType.slice(1)
       const setSpell = (nth) => firstRow.find(`td:nth-child(${nth})`).length ? {
         name: getText(firstRow, nth),
         action: getText(secondRow, nth - 2),
@@ -54,11 +52,9 @@ export const scrapping = async (html) => {
     }
   }
 
-  setFamiliars(common, 'Common')
-  setFamiliars(rare, 'Rare')
-  setFamiliars(epic, 'Epic')
-  setFamiliars(legendary, 'Legendary')
+  for (let index = 3; index < $('article table').length; index++) {
+    setFamiliars($(`article table:nth-of-type(${index}) tr`))
+  }
 
-  // console.log(await Promise.all(familiars))
   fs.promises.writeFile('data/familiars.json', JSON.stringify(await Promise.all(familiars)), 'utf8')
 }
