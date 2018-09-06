@@ -1,0 +1,48 @@
+<form class="form-row">
+  <div class="form-group col-md-2">
+    <label for="typeSelect">Type</label>
+    <select id="typeSelect" name="typeSelect" class="form-control" data-column="1">
+      <option value="all">--All--</option>
+      <% for (let i = 0; i < locals.selectType.length; i++) { %>
+      <option value="<%= locals.selectType[i] %>"><%= locals.selectType[i] %></option>
+      <% } %>
+    </select>
+  </div>
+  or
+  <div class="form-group col-md-2">
+    <label for="spell">Spell</label>
+    <select id="spell" name="spell" class="form-control" data-column="6">
+      <option value="all">--All--</option>
+      <% for (let i = 0; i < locals.selectSpell.length; i++) { %>
+      <option value="<%= locals.selectSpell[i] %>"><%= locals.selectSpell[i] %></option>
+      <% } %>
+    </select>
+  </div>
+  <% if (locals.selectPassiveAbility) { %>
+  or
+  <div class="form-group col-md-2">
+    <label for="selectPassiveAbility">Passive ability</label>
+    <select id="selectPassiveAbility" name="selectPassiveAbility" class="form-control" data-column="11">
+      <option value="all">--All--</option>
+      <% for (let i = 0; i < locals.selectPassiveAbility.length; i++) { %>
+      <option value="<%= locals.selectPassiveAbility[i] %>"><%= locals.selectPassiveAbility[i] %></option>
+      <% } %>
+    </select>
+  </div>
+  <% } %>
+  <% if (locals.selectFusion) { %>
+  or
+  <div class="form-group col-md-2">
+    <label for="selectFusion">Fusion</label>
+    <select id="selectFusion" name="selectFusion" class="form-control" data-column="12">
+      <option value="all">--All--</option>
+      <% for (let i = 0; i < locals.selectFusion.length; i++) { %>
+      <option value="<%= locals.selectFusion[i] %>"><%= locals.selectFusion[i] %></option>
+      <% } %>
+    </select>
+  </div>
+  <% } %>
+  <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
+  <input type="submit" value="Submit" class="btn submit">
+  <input type="reset" value="Reset" class="btn reset">
+</form>

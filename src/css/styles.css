@@ -1,0 +1,190 @@
+body {
+  background-color: #9fa9b5;
+}
+#backToTop {
+  position: absolute;
+  top: 0;
+}
+main {
+  margin-top: 60px;
+}
+header {
+  background-color: #324254;
+}
+header ul {
+  align-items: center;
+  border-bottom: 1px solid #dee2e6;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+header li > a {
+  color: #fff;
+  display: block;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: -2px 0 #000, 0 2px #000, 2px 0 #000, 0 -2px #000;
+}
+header li > a:hover {
+  background-color: #f18829;
+  color: #fff;
+  text-decoration: none;
+}
+header ul .active {
+  background-color: #f18829;
+  color: #fff;
+}
+header li.col-md-2 {
+  border-right: 1px solid #dee2e6;
+  line-height: 50px;
+  padding: 0;
+}
+.github {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.form-row {
+  margin: 5px;
+}
+form .btn {
+  border: 3px solid #000;
+  border-radius: .55rem;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin-left: 5px;
+  text-shadow: -2px 0 #000, 0 2px #000, 2px 0 #000, 0 -2px #000;
+}
+label {
+  color: #343434;
+  font-weight: 900;
+}
+.submit {
+  background-color: #1eaad0;
+}
+.reset {
+  background-color: #9bd01e;
+}
+.table td,
+.table th {
+  vertical-align: middle;
+}
+th {
+  background-color: #324254;
+  color: #fff;
+  cursor: pointer;
+  text-align: center;
+  text-shadow: -2px 0 #000, 0 2px #000, 2px 0 #000, 0 -2px #000;
+}
+th:hover {
+  background-color: #f18829;
+}
+tr:nth-child(even) {
+  background-color: #b8c2cf;
+}
+th:nth-child(2),
+td:nth-child(2) {
+  display: none;
+}
+td:nth-child(1),
+td:nth-child(4),
+td:nth-child(5),
+td:nth-child(6) {
+  text-align: center;
+}
+.focus {
+  background-color: #f18829;
+  color: #fff;
+}
+.asc::after {
+  content: '⇧';
+}
+.desc::after {
+  content: '⇩';
+}
+.common td:nth-child(1) {
+  background-color: #7eff7e;
+}
+.rare td:nth-child(1) {
+  background-color: #7e87f4;
+}
+.epic td:nth-child(1) {
+  background-color: #ff817e;
+}
+.legendary td:nth-child(1) {
+  background-color: #ffffb1;
+}
+.mythic td:nth-child(1) {
+  background-color: #8e546a;
+}
+.invisible {
+  display: none;
+}
+footer {
+  display: flex;
+}
+footer div {
+  margin: 0 10px;
+}
+.footer-fixed {
+  bottom: 0;
+  right: 0;
+  position: fixed;
+  z-index: 1030;
+}
+
+@media only screen and (max-width: 800px) {
+  .fixed-top {
+    position: relative;
+  }
+  main {
+    margin: 0;
+  }
+  .github {
+    display: none;
+  }
+  table,
+  thead,
+  tbody,
+  tr,
+  th,
+  td {
+    display: block;
+  }
+  .table thead,
+  .table tfoot {
+    display: none;
+  }
+  .table td {
+    margin-top: -1px;
+    padding-left: 150px;
+    position: relative;
+  }
+  .table tr:nth-child(even) {
+    background-color: #9fa9b5;
+  }
+  .table td:nth-child(even) {
+    background-color: #b8c2cf;
+  }
+  .table td::before {
+    align-items: center;
+    background-color: #324254;
+    bottom: 0;
+    color: #FFF;
+    content: attr(data-label);
+    display: flex;
+    font-weight: bold;
+    left: 0;
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    width: 130px;
+  }
+  .table tr {
+    margin-bottom: 1rem;
+  }
+  .table th + td {
+    padding-left: 10px;
+  }
+}
