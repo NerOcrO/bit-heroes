@@ -93,6 +93,7 @@ const displayFamiliars = async (request, response, page) => {
         title: page,
         data,
         csrfToken: request.csrfToken(),
+        count: data.length,
       })
     })
     .catch(error => console.log(error))
