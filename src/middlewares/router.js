@@ -25,21 +25,21 @@ const selectpassiveAbility = data => data.reduce((accumulator, element) => {
   return accumulator
 }, [])
 
-const selectSpells = data => data.reduce((accumulator, element) => {
-  if (accumulator.every(type => type !== element.spell1.action)) {
-    accumulator.push(element.spell1.action)
+const selectSkills = data => data.reduce((accumulator, element) => {
+  if (accumulator.every(type => type !== element.skill1.action)) {
+    accumulator.push(element.skill1.action)
   }
-  if (element.spell2.action !== undefined && accumulator.every(type => type !== element.spell2.action)) {
-    accumulator.push(element.spell2.action)
+  if (element.skill2.action !== undefined && accumulator.every(type => type !== element.skill2.action)) {
+    accumulator.push(element.skill2.action)
   }
-  if (element.spell3.action !== undefined && accumulator.every(type => type !== element.spell3.action)) {
-    accumulator.push(element.spell3.action)
+  if (element.skill3.action !== undefined && accumulator.every(type => type !== element.skill3.action)) {
+    accumulator.push(element.skill3.action)
   }
-  if (element.spell4.action !== undefined && accumulator.every(type => type !== element.spell4.action)) {
-    accumulator.push(element.spell4.action)
+  if (element.skill4.action !== undefined && accumulator.every(type => type !== element.skill4.action)) {
+    accumulator.push(element.skill4.action)
   }
-  if (element.spell5 && element.spell5.action !== undefined && accumulator.every(type => type !== element.spell5.action)) {
-    accumulator.push(element.spell5.action)
+  if (element.skill5 && element.skill5.action !== undefined && accumulator.every(type => type !== element.skill5.action)) {
+    accumulator.push(element.skill5.action)
   }
 
   return accumulator
@@ -86,7 +86,7 @@ const displayFamiliars = async (request, response, page) => {
         response.locals.selectFusion = selectFusions(data).sort()
       }
 
-      response.locals.selectSpell = selectSpells(data).sort()
+      response.locals.selectSkill = selectSkills(data).sort()
 
       response.render('layout', {
         view: page,
@@ -107,6 +107,24 @@ const displaySoon = (request, response, page) => {
   })
 }
 
+const displayMounts = async (request, response, page) => {
+  await fs.promises.readFile(`data/${page}.json`, 'utf8')
+    .then((rawData) => {
+      const data = JSON.parse(rawData)
+
+      response.locals.selectType = select(data, 'type')
+
+      response.render('layout', {
+        view: page,
+        title: page,
+        data,
+        csrfToken: request.csrfToken(),
+        count: data.length,
+      })
+    })
+    .catch(error => console.log(error))
+}
+
 router.get('/', (request, response) => {
   displayFamiliars(request, response, 'familiars')
 })
@@ -124,7 +142,7 @@ router.get('/equipments', (request, response) => {
 })
 
 router.get('/mounts', (request, response) => {
-  displaySoon(request, response, 'mounts')
+  displayMounts(request, response, 'mounts')
 })
 
 export default router

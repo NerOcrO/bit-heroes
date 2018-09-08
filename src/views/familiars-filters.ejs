@@ -8,16 +8,18 @@
       <% } %>
     </select>
   </div>
+  <% if (locals.selectSkill) { %>
   or
   <div class="form-group col-md-2">
-    <label for="spell">Spell</label>
-    <select id="spell" name="spell" class="form-control" data-column="6">
+    <label for="skill">Skill</label>
+    <select id="skill" name="skill" class="form-control" data-column="6">
       <option value="all">--All--</option>
-      <% for (let i = 0; i < locals.selectSpell.length; i++) { %>
-      <option value="<%= locals.selectSpell[i] %>"><%= locals.selectSpell[i] %></option>
+      <% for (let i = 0; i < locals.selectSkill.length; i++) { %>
+      <option value="<%= locals.selectSkill[i] %>"><%= locals.selectSkill[i] %></option>
       <% } %>
     </select>
   </div>
+  <% } %>
   <% if (locals.selectPassiveAbility) { %>
   or
   <div class="form-group col-md-2">

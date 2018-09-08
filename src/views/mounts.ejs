@@ -1,1 +1,35 @@
-<p>Coming soon.</p>
+<%- include('familiars-filters') %>
+<table class="table table-bordered mounts">
+  <thead>
+    <tr>
+      <th title="<%= locals.count %> mounts"><%= locals.count %></th>
+      <th id="type" class="asc focus">Type</th>
+      <th id="name" class="asc">Name</th>
+      <th id="moveSpeed" class="asc">Move speed&nbsp;(%)</th>
+      <th id="bonus" class="asc">Bonus</th>
+      <th id="skill" class="asc">Skill</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for (let i = 0; i < locals.data.length; i++) { %>
+    <tr id="<%= locals.data[i].name.replace(/ /g, '') %>" class="<%= locals.data[i].type.toLowerCase() %>">
+      <td><img src="<%= locals.data[i].avatar %>" alt=""></td>
+      <td><%= locals.data[i].type %></td>
+      <td><%= locals.data[i].name %></td>
+      <td><%= locals.data[i].moveSpeed %></td>
+      <td><%= locals.data[i].bonus %></td>
+      <td><%= locals.data[i].skill %></td>
+    </tr>
+    <% } %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th title="<%= locals.count %> mounts"><%= locals.count %></th>
+      <th id="type" class="asc focus">Type</th>
+      <th id="name" class="asc">Name</th>
+      <th id="moveSpeed" class="asc">Move speed&nbsp;(%)</th>
+      <th id="bonus" class="asc">Bonus</th>
+      <th id="skill" class="asc">Skill</th>
+    </tr>
+  </tfoot>
+</table>

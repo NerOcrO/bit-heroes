@@ -7,12 +7,12 @@ export const urlWiki = 'http://bit-heroes.wikia.com/wiki/List_of_schematics'
 export const scrapping = async (html) => {
   const $ = cheerio.load(html)
   const setSchematic = (index, element) => {
-    const row = $(element)
-    const createFusion = (row) => {
+    const tr = $(element)
+    const createFusion = (tr) => {
       const fusion = []
       for (let index = 3; index <= 6; index++) {
-        const split = getText(row, index).trim().match(/^([0-9]*) ([\w ]*)/)
-        let name = getText(row, index).trim()
+        const split = getText(tr, index).trim().match(/^([0-9]*) ([\w ]*)/)
+        let name = getText(tr, index).trim()
         let count = 1
 
         if (split !== null) {
@@ -27,8 +27,8 @@ export const scrapping = async (html) => {
     }
 
     return {
-      name: getText(row, 2).replace(' Schematic', ''),
-      requisite: createFusion(row),
+      name: getText(tr, 2).replace(' Schematic', ''),
+      requisite: createFusion(tr),
     }
   }
   const schematics = $('table tr')

@@ -53,7 +53,7 @@ const selectRows = (event) => {
     let content = tr.children[columnId].textContent
     let selectValue = event.currentTarget.value
 
-    // Concat all Spells.
+    // Concat all Skills.
     if (columnId === '6') {
       content += tr.children[7].textContent
       content += tr.children[8].textContent
@@ -89,7 +89,7 @@ $('.submit').classList.add('invisible')
 $$('th').forEach(th => th.addEventListener('click', sortTableRow))
 $('.reset').addEventListener('click', reset)
 $$('#typeSelect').forEach(option => option.addEventListener('change', selectRows))
-$$('#spell').forEach(option => option.addEventListener('change', selectRows))
+$$('#skill').forEach(option => option.addEventListener('change', selectRows))
 $$('#selectPassiveAbility').forEach(option => option.addEventListener('change', selectRows))
 $$('#selectFusion').forEach(option => option.addEventListener('change', selectRows))
 const labels = Array.from($$('thead th')).map(th => th.innerText)

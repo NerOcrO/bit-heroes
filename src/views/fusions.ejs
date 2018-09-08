@@ -1,5 +1,5 @@
 <%- include('familiars-filters') %>
-<table class="table table-bordered">
+<table class="table table-bordered familiars">
   <thead>
     <tr>
       <th title="<%= locals.count %> fusions"><%= locals.count %></th>
@@ -8,11 +8,11 @@
       <th id="power" class="asc">Power&nbsp;(%)</th>
       <th id="stamina" class="asc">Stamina&nbsp;(%)</th>
       <th id="agility" class="asc">Agility&nbsp;(%)</th>
-      <th id="spell1" class="asc">Spell 1</th>
-      <th id="spell2" class="asc">Spell 2</th>
-      <th id="spell3" class="asc">Spell 3</th>
-      <th id="spell4" class="asc">Spell 4</th>
-      <th id="spell5" class="asc">Spell 5</th>
+      <th id="skill1" class="asc">Skill 1</th>
+      <th id="skill2" class="asc">Skill 2</th>
+      <th id="skill3" class="asc">Skill 3</th>
+      <th id="skill4" class="asc">Skill 4</th>
+      <th id="skill5" class="asc">Skill 5</th>
       <th id="passiveAbility" class="asc">Passive ability</th>
       <th id="fusion" class="asc">Fusion</th>
     </tr>
@@ -26,11 +26,11 @@
       <td><%= locals.data[i].power %></td>
       <td><%= locals.data[i].stamina %></td>
       <td><%= locals.data[i].agility %></td>
-      <td><%= locals.data[i].spell1.name %><br><%= locals.data[i].spell1.action %><br><%= locals.data[i].spell1.pourcentage %></td>
-      <td><%= locals.data[i].spell2.name %><br><%= locals.data[i].spell2.action %><br><%= locals.data[i].spell2.pourcentage %></td>
-      <td><%= locals.data[i].spell3.name %><br><%= locals.data[i].spell3.action %><br><%= locals.data[i].spell3.pourcentage %></td>
-      <td><%= locals.data[i].spell4.name %><br><%= locals.data[i].spell4.action %><br><%= locals.data[i].spell4.pourcentage %></td>
-      <td><%= locals.data[i].spell5.name %><br><%= locals.data[i].spell5.action %><br><%= locals.data[i].spell5.pourcentage %></td>
+      <td><%= locals.data[i].skill1.name %><br><%= locals.data[i].skill1.action %><br><%= locals.data[i].skill1.pourcentage %></td>
+      <td><%= locals.data[i].skill2.name %><br><%= locals.data[i].skill2.action %><br><%= locals.data[i].skill2.pourcentage %></td>
+      <td><%= locals.data[i].skill3.name %><br><%= locals.data[i].skill3.action %><br><%= locals.data[i].skill3.pourcentage %></td>
+      <td><%= locals.data[i].skill4.name %><br><%= locals.data[i].skill4.action %><br><%= locals.data[i].skill4.pourcentage %></td>
+      <td><%= locals.data[i].skill5.name %><br><%= locals.data[i].skill5.action %><br><%= locals.data[i].skill5.pourcentage %></td>
       <td>
         <ul>
           <% for (let j = 0; j < locals.data[i].passiveAbility.length; j++) { %>
@@ -81,11 +81,11 @@
       <th id="power" class="asc">Power (%)</th>
       <th id="stamina" class="asc">Stamina (%)</th>
       <th id="agility" class="asc">Agility (%)</th>
-      <th id="spell1" class="asc">Spell 1</th>
-      <th id="spell2" class="asc">Spell 2</th>
-      <th id="spell3" class="asc">Spell 3</th>
-      <th id="spell4" class="asc">Spell 4</th>
-      <th id="spell5" class="asc">Spell 5</th>
+      <th id="skill1" class="asc">Skill 1</th>
+      <th id="skill2" class="asc">Skill 2</th>
+      <th id="skill3" class="asc">Skill 3</th>
+      <th id="skill4" class="asc">Skill 4</th>
+      <th id="skill5" class="asc">Skill 5</th>
       <th id="passiveAbility" class="asc">Passive ability</th>
       <th id="fusion" class="asc">Fusion</th>
     </tr>
