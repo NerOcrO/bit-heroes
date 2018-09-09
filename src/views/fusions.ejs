@@ -62,7 +62,7 @@
             || locals.data[i].fusion[j].name.includes('Demon Hide')
             || locals.data[i].fusion[j].name.includes('Bacon')
             ) { %>
-          <li><%= locals.data[i].fusion[j].count %> <%= locals.data[i].fusion[j].name %></li>
+          <li><%= new Intl.NumberFormat().format(locals.data[i].fusion[j].count) %> <%= locals.data[i].fusion[j].name %></li>
           <% }
           else
           {
