@@ -117,6 +117,10 @@ const selectRows = () => {
       tr.classList.add('invisible')
     }
   })
+
+  $$('#count').forEach((element) => {
+    element.innerHTML = $$('tbody tr').length - $$('tr.invisible').length
+  })
 }
 
 const reset = () => {
