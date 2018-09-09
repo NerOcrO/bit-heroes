@@ -30,15 +30,17 @@
       <td><%= locals.data[i].power %></td>
       <td><%= locals.data[i].stamina %></td>
       <td><%= locals.data[i].agility %></td>
-      <td><%= locals.data[i].skill1.name %><br><%= locals.data[i].skill1.action %><br><%= locals.data[i].skill1.pourcentage %></td>
-      <td><%= locals.data[i].skill2.name %><br><%= locals.data[i].skill2.action %><br><%= locals.data[i].skill2.pourcentage %></td>
-      <td><%= locals.data[i].skill3.name %><br><%= locals.data[i].skill3.action %><br><%= locals.data[i].skill3.pourcentage %></td>
-      <td><%= locals.data[i].skill4.name %><br><%= locals.data[i].skill4.action %><br><%= locals.data[i].skill4.pourcentage %></td>
-      <td><%= locals.data[i].skill5.name %><br><%= locals.data[i].skill5.action %><br><%= locals.data[i].skill5.pourcentage %></td>
+      <% for (let j = 0; j < 5; j++) { %>
+      <td>
+        <% if (locals.data[i].skills[j]) { %>
+          <%= locals.data[i].skills[j].name %> (<%= locals.data[i].skills[j].skillPoint %>SP)<br><%= locals.data[i].skills[j].action %><br><%= locals.data[i].skills[j].pourcentage %>
+        <% } %>
+      </td>
+      <% } %>
       <td>
         <ul>
           <% for (let j = 0; j < locals.data[i].passiveAbility.length; j++) { %>
-            <li><%= locals.data[i].passiveAbility[j].pourcentage %> <%= locals.data[i].passiveAbility[j].ability %></li>
+          <li><%= locals.data[i].passiveAbility[j].pourcentage %> <%= locals.data[i].passiveAbility[j].ability %></li>
           <% } %>
         </ul>
       </td>

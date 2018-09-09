@@ -26,21 +26,13 @@ const selectpassiveAbility = data => data.reduce((accumulator, familiar) => {
 }, [])
 
 const selectSkills = data => data.reduce((accumulator, familiar) => {
-  if (accumulator.every(type => type !== familiar.skill1.action)) {
-    accumulator.push(familiar.skill1.action)
-  }
-  if (familiar.skill2.action !== undefined && accumulator.every(type => type !== familiar.skill2.action)) {
-    accumulator.push(familiar.skill2.action)
-  }
-  if (familiar.skill3.action !== undefined && accumulator.every(type => type !== familiar.skill3.action)) {
-    accumulator.push(familiar.skill3.action)
-  }
-  if (familiar.skill4.action !== undefined && accumulator.every(type => type !== familiar.skill4.action)) {
-    accumulator.push(familiar.skill4.action)
-  }
-  if (familiar.skill5 && familiar.skill5.action !== undefined && accumulator.every(type => type !== familiar.skill5.action)) {
-    accumulator.push(familiar.skill5.action)
-  }
+  familiar.skills.forEach((skill) => {
+    if (skill.action) {
+      if (accumulator.every(type => type !== skill.action)) {
+        accumulator.push(skill.action)
+      }
+    }
+  })
 
   return accumulator
 }, [])
@@ -88,18 +80,16 @@ const displayFamiliars = async (request, response, page) => {
       }
 
       data = data.map((familiar) => {
+        familiar.rawSkills = familiar.skills.map(skill => `${skill.skillPoint}|${skill.action}`)
+
         if (familiar.passiveAbility) {
           familiar.rawPassiveAbilities = familiar.passiveAbility.map(passiveAbility => passiveAbility.ability)
         }
-        if (familiar.skill5) {
-          familiar.rawSkills = `${familiar.skill1.action},${familiar.skill2.action},${familiar.skill3.action},${familiar.skill4.action},${familiar.skill5.action}`
-        }
-        else {
-          familiar.rawSkills = `${familiar.skill1.action},${familiar.skill2.action},${familiar.skill3.action},${familiar.skill4.action}`
-        }
+
         if (familiar.fusion) {
           familiar.rawFusion = familiar.fusion.map(requisite => requisite.name)
         }
+
         return familiar
       })
 

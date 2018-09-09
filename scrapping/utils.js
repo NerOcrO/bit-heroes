@@ -26,3 +26,53 @@ export const getAvatarBase64 = async (url) => {
  *   The text.
  */
 export const getText = (element, nth) => element.find(`td:nth-child(${nth})`).text().trim()
+
+/**
+ * @param {Object} firstRow
+ *   The first row.
+ * @param {Object} secondRow
+ *   The second row.
+ * @param {Object} thirdRow
+ *   The third row.
+ * @param {number} nth
+ *   Column id.
+ * @param {string} type
+ *   Familiar's type: familiar or fusion.
+ *
+ * @return {object}
+ *   The skill.
+ */
+export const setSkill = (firstRow, secondRow, thirdRow, nth, type = 'familiar') => {
+  if (firstRow.find(`td:nth-child(${nth})`).text().trim() !== '') {
+    return {
+      name: getText(firstRow, nth).replace(/( \([0-4]SP\))/, ''),
+      skillPoint: getText(firstRow, nth).match(/([0-4])/)[0],
+      action: getText(secondRow, nth - (type === 'familiar' ? 2 : 1)),
+      pourcentage: getText(thirdRow, nth - 1),
+    }
+  }
+}
+
+/**
+ * @param {Array} columns
+ *   Columns array.
+ * @param {Object} firstRow
+ *   The first row.
+ * @param {Object} secondRow
+ *   The second row.
+ * @param {Object} thirdRow
+ *   The third row.
+ * @param {string} type
+ *   Familiar's type: familiar or fusion.
+ *
+ * @return {array}
+ *   Array with all skills.
+ */
+export const setSkills = (columns, firstRow, secondRow, thirdRow, type = 'familiar') =>
+  columns.reduce((accumulator, nth) => {
+    const skill = setSkill(firstRow, secondRow, thirdRow, nth, type)
+    if (skill) {
+      accumulator.push(skill)
+    }
+    return accumulator
+  }, [])

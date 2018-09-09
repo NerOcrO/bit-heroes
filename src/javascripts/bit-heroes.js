@@ -70,29 +70,36 @@ const selectRows = () => {
 
     if (
       selectValue[1]
-      && selectValue[1].content !== 'all'
-      && !tr.dataset.rawSkills.split(',').some(skill => skill === selectValue[1].content)
+      && (
+        selectValue[1].content !== 'all'
+        && !tr.dataset.rawSkills.split(',').some(skill => skill.slice(2) === selectValue[1].content)
+        || selectValue[1].content !== 'all'
+        && selectValue[2].content !== 'all'
+        && !tr.dataset.rawSkills.split(',').some(skill => skill.slice(2) === selectValue[1].content && skill.slice(0, 1) === selectValue[2].content)
+        ||selectValue[2].content !== 'all'
+        && !tr.dataset.rawSkills.split(',').some(skill => skill.slice(0, 1) === selectValue[2].content)
+      )
     ) {
       flagSkill = false
     }
 
     if (
-      selectValue[2]
-      && selectValue[2].content !== 'all'
-      && !tr.dataset.rawPassiveAbilities.split(',').some(passiveAbility => passiveAbility === selectValue[2].content)
+      selectValue[3]
+      && selectValue[3].content !== 'all'
+      && !tr.dataset.rawPassiveAbilities.split(',').some(passiveAbility => passiveAbility === selectValue[3].content)
     ) {
       flagPassiveAbility = false
     }
 
     if (
-      selectValue[3]
-      && selectValue[3].content !== 'all'
+      selectValue[4]
+      && selectValue[4].content !== 'all'
     ) {
       flagType = true
       flagSkill = true
       flagPassiveAbility = true
 
-      if (!tr.dataset.rawFusion.split(',').some(requisite => requisite === selectValue[3].content)) {
+      if (!tr.dataset.rawFusion.split(',').some(requisite => requisite === selectValue[4].content)) {
 
         flagFusion = false
       }
