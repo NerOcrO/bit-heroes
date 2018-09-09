@@ -47,28 +47,63 @@ const sortTableRow = (event) => {
   $$('th').forEach(cleanTableHead, id)
 }
 
-const selectRows = (event) => {
+const selectRows = () => {
+  const selectValue = []
+
+  $$('select').forEach((select) => {
+    selectValue.push({ content: select.value, columnId: select.dataset.columnid })
+  })
+
   $$('tbody tr').forEach((tr) => {
-    const columnId = event.currentTarget.dataset.column
-    let content = tr.children[columnId].textContent
-    let selectValue = event.currentTarget.value
+    let flagType = true
+    let flagSkill = true
+    let flagPassiveAbility = true
+    let flagFusion = true
 
-    // Concat all Skills.
-    if (columnId === '6') {
-      content += tr.children[7].textContent
-      content += tr.children[8].textContent
-      content += tr.children[9].textContent
-      content += tr.children[10].textContent
+    if (
+      selectValue[0]
+      && selectValue[0].content !== 'all'
+      && tr.classList[0] !== selectValue[0].content
+    ) {
+      flagType = false
     }
 
-    if (columnId === '11') {
-      selectValue = `% ${event.currentTarget.value}`
-    }
-    else if (columnId === '12') {
-      selectValue = ` ${event.currentTarget.value}\\W`
+    if (
+      selectValue[1]
+      && selectValue[1].content !== 'all'
+      && !tr.dataset.rawSkills.split(',').some(skill => skill === selectValue[1].content)
+    ) {
+      flagSkill = false
     }
 
-    if (content.trim().match(new RegExp(selectValue, 'g')) || event.currentTarget.value === 'all') {
+    if (
+      selectValue[2]
+      && selectValue[2].content !== 'all'
+      && !tr.dataset.rawPassiveAbilities.split(',').some(passiveAbility => passiveAbility === selectValue[2].content)
+    ) {
+      flagPassiveAbility = false
+    }
+
+    if (
+      selectValue[3]
+      && selectValue[3].content !== 'all'
+    ) {
+      flagType = true
+      flagSkill = true
+      flagPassiveAbility = true
+
+      if (!tr.dataset.rawFusion.split(',').some(requisite => requisite === selectValue[3].content)) {
+
+        flagFusion = false
+      }
+    }
+
+    if (
+      flagType
+      && flagSkill
+      && flagPassiveAbility
+      && flagFusion
+    ) {
       tr.classList.remove('invisible')
     }
     else {
@@ -86,12 +121,11 @@ const reset = () => {
 }
 
 $('.submit').classList.add('invisible')
-$$('th').forEach(th => th.addEventListener('click', sortTableRow))
 $('.reset').addEventListener('click', reset)
-$$('#typeSelect').forEach(option => option.addEventListener('change', selectRows))
-$$('#skill').forEach(option => option.addEventListener('change', selectRows))
-$$('#selectPassiveAbility').forEach(option => option.addEventListener('change', selectRows))
-$$('#selectFusion').forEach(option => option.addEventListener('change', selectRows))
+$$('select').forEach(option => option.addEventListener('change', selectRows))
+$$('th').forEach(th => th.addEventListener('click', sortTableRow))
+
+// For responsive.
 const labels = Array.from($$('thead th')).map(th => th.innerText)
 $$('.table td').forEach((td, index) => {
   td.setAttribute('data-label', labels[index % labels.length])

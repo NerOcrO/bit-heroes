@@ -3,8 +3,8 @@ import fs from 'fs'
 
 const router = express.Router()
 
-const select = (data, index) => data.reduce((accumulator, element) => {
-  const text = element[index].replace(/[0-9.]*% /g, '')
+const selectType = (data, index) => data.reduce((accumulator, familiar) => {
+  const text = familiar[index].replace(/[0-9.]*% /g, '')
 
   if (accumulator.every(type => type !== text)) {
     accumulator.push(text)
@@ -13,8 +13,8 @@ const select = (data, index) => data.reduce((accumulator, element) => {
   return accumulator
 }, [])
 
-const selectpassiveAbility = data => data.reduce((accumulator, element) => {
-  element.passiveAbility.forEach((passiveAbility) => {
+const selectpassiveAbility = data => data.reduce((accumulator, familiar) => {
+  familiar.passiveAbility.forEach((passiveAbility) => {
     const text = passiveAbility.ability.replace(/[0-9.%]*/, '')
 
     if (accumulator.every(type => type !== text)) {
@@ -25,27 +25,27 @@ const selectpassiveAbility = data => data.reduce((accumulator, element) => {
   return accumulator
 }, [])
 
-const selectSkills = data => data.reduce((accumulator, element) => {
-  if (accumulator.every(type => type !== element.skill1.action)) {
-    accumulator.push(element.skill1.action)
+const selectSkills = data => data.reduce((accumulator, familiar) => {
+  if (accumulator.every(type => type !== familiar.skill1.action)) {
+    accumulator.push(familiar.skill1.action)
   }
-  if (element.skill2.action !== undefined && accumulator.every(type => type !== element.skill2.action)) {
-    accumulator.push(element.skill2.action)
+  if (familiar.skill2.action !== undefined && accumulator.every(type => type !== familiar.skill2.action)) {
+    accumulator.push(familiar.skill2.action)
   }
-  if (element.skill3.action !== undefined && accumulator.every(type => type !== element.skill3.action)) {
-    accumulator.push(element.skill3.action)
+  if (familiar.skill3.action !== undefined && accumulator.every(type => type !== familiar.skill3.action)) {
+    accumulator.push(familiar.skill3.action)
   }
-  if (element.skill4.action !== undefined && accumulator.every(type => type !== element.skill4.action)) {
-    accumulator.push(element.skill4.action)
+  if (familiar.skill4.action !== undefined && accumulator.every(type => type !== familiar.skill4.action)) {
+    accumulator.push(familiar.skill4.action)
   }
-  if (element.skill5 && element.skill5.action !== undefined && accumulator.every(type => type !== element.skill5.action)) {
-    accumulator.push(element.skill5.action)
+  if (familiar.skill5 && familiar.skill5.action !== undefined && accumulator.every(type => type !== familiar.skill5.action)) {
+    accumulator.push(familiar.skill5.action)
   }
 
   return accumulator
 }, [])
 
-const selectFusions = data => data.reduce((accumulator, element) => {
+const selectFusions = data => data.reduce((accumulator, familiar) => {
   const materials = [
     'Common Material',
     'Rare Material',
@@ -65,8 +65,8 @@ const selectFusions = data => data.reduce((accumulator, element) => {
     'Gold',
   ]
 
-  element.fusion.forEach((fusion) => {
-    if (accumulator.every(type => type !== fusion.name && materials.every(element => element !== fusion.name))) {
+  familiar.fusion.forEach((fusion) => {
+    if (accumulator.every(type => type !== fusion.name && materials.every(material => material !== fusion.name))) {
       accumulator.push(fusion.name)
     }
   })
@@ -77,16 +77,31 @@ const selectFusions = data => data.reduce((accumulator, element) => {
 const displayFamiliars = async (request, response, page) => {
   await fs.promises.readFile(`data/${page}.json`, 'utf8')
     .then((rawData) => {
-      const data = JSON.parse(rawData)
+      let data = JSON.parse(rawData)
 
-      response.locals.selectType = select(data, 'type')
+      response.locals.selectType = selectType(data, 'type')
+      response.locals.selectSkill = selectSkills(data).sort()
 
       if (page === 'fusions') {
         response.locals.selectPassiveAbility = selectpassiveAbility(data).sort()
         response.locals.selectFusion = selectFusions(data).sort()
       }
 
-      response.locals.selectSkill = selectSkills(data).sort()
+      data = data.map((familiar) => {
+        if (familiar.passiveAbility) {
+          familiar.rawPassiveAbilities = familiar.passiveAbility.map(passiveAbility => passiveAbility.ability)
+        }
+        if (familiar.skill5) {
+          familiar.rawSkills = `${familiar.skill1.action},${familiar.skill2.action},${familiar.skill3.action},${familiar.skill4.action},${familiar.skill5.action}`
+        }
+        else {
+          familiar.rawSkills = `${familiar.skill1.action},${familiar.skill2.action},${familiar.skill3.action},${familiar.skill4.action}`
+        }
+        if (familiar.fusion) {
+          familiar.rawFusion = familiar.fusion.map(requisite => requisite.name)
+        }
+        return familiar
+      })
 
       response.render('layout', {
         view: page,
@@ -112,7 +127,7 @@ const displayMounts = async (request, response, page) => {
     .then((rawData) => {
       const data = JSON.parse(rawData)
 
-      response.locals.selectType = select(data, 'type')
+      response.locals.selectType = selectType(data, 'type')
 
       response.render('layout', {
         view: page,

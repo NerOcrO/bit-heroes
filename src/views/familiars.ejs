@@ -17,7 +17,7 @@
   </thead>
   <tbody>
     <% for (let i = 0; i < locals.data.length; i++) { %>
-    <tr id="<%= locals.data[i].name.replace(/ /g, '') %>" class="<%= locals.data[i].type.toLowerCase() %>">
+    <tr id="<%= locals.data[i].name.replace(/ /g, '') %>" class="<%= locals.data[i].type.toLowerCase() %>" data-raw-skills="<%= locals.data[i].rawSkills %>">
       <td><img src="<%= locals.data[i].avatar %>" alt=""></td>
       <td><%= locals.data[i].type %></td>
       <td><%= locals.data[i].name %></td>

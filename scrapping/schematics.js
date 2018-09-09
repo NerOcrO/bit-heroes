@@ -6,8 +6,8 @@ export const urlWiki = 'http://bit-heroes.wikia.com/wiki/List_of_schematics'
 
 export const scrapping = async (html) => {
   const $ = cheerio.load(html)
-  const setSchematic = (index, element) => {
-    const tr = $(element)
+  const setSchematic = (index, row) => {
+    const tr = $(row)
     const createFusion = (tr) => {
       const fusion = []
       for (let index = 3; index <= 6; index++) {

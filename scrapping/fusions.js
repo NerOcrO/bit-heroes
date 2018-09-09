@@ -22,8 +22,8 @@ export const scrapping = async (html) => {
       const setPassiveAbility = (rowAbilities) => {
         const abilities = rowAbilities.split(',')
 
-        return abilities.map((element) => {
-          const split = element.trim().match(/^([0-9.]*%) ([\w .%-]*)/)
+        return abilities.map((ability) => {
+          const split = ability.trim().match(/^([0-9.]*%) ([\w .%-]*)/)
 
           return {
             pourcentage: split[1],
