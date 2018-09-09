@@ -1,6 +1,9 @@
 body {
   background-color: #9fa9b5;
 }
+a {
+  color: #fff;
+}
 ul {
   margin: 0;
   padding-left: 10px;
