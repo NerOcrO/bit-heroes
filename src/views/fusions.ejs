@@ -71,7 +71,7 @@
             if (locals.data.find(data => data.name === name)) {
               url = 'fusions'
             } %>
-          <li><%= locals.data[i].fusion[j].count %> <a href="/<%= url %>#<%= locals.data[i].fusion[j].name.replace(/ /g, '') %>"><b><%= locals.data[i].fusion[j].name %></b></a></li>
+          <li><%= locals.data[i].fusion[j].count %> <a href="/<%= url %>#<%= locals.data[i].fusion[j].name.replace(/ /g, '') %>"><b><%= locals.data[i].fusion[j].name %></b></a><%= locals.data[i].fusion[j].zone %></li>
           <% } %>
         <% } %>
         </ul>

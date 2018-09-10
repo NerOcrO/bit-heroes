@@ -78,7 +78,7 @@ const selectFusions = data => data.reduce((accumulator, familiar) => {
 
 const displayFamiliars = async (request, response, page) => {
   await fs.promises.readFile(`data/${page}.json`, 'utf8')
-    .then((rawData) => {
+    .then(async (rawData) => {
       let data = JSON.parse(rawData)
 
       response.locals.selectType = selectType(data, 'type')
@@ -92,15 +92,27 @@ const displayFamiliars = async (request, response, page) => {
         response.locals.selectZone = selectZones(data, 'zone').sort()
       }
 
+      if (page === 'fusions') {
+        // It's crappy but...
+        var dataFamiliars = JSON.parse(fs.readFileSync('data/familiars.json', 'utf8'))
+      }
+
       data = data.map((familiar) => {
         familiar.rawSkills = familiar.skills.map(skill => `${skill.skillPoint}|${skill.action}`)
 
-        if (familiar.passiveAbility) {
+        if (page === 'fusions') {
           familiar.rawPassiveAbilities = familiar.passiveAbility.map(passiveAbility => passiveAbility.ability)
-        }
-
-        if (familiar.fusion) {
           familiar.rawFusion = familiar.fusion.map(requisite => requisite.name)
+
+          familiar.fusion.map((requisite) => {
+            const familiar = dataFamiliars.find(element => element.name === requisite.name)
+
+            if (familiar) {
+              requisite.zone = ` (${familiar.zone})`
+            }
+
+            return requisite
+          })
         }
 
         return familiar
