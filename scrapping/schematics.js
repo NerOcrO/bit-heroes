@@ -13,7 +13,7 @@ export const scrapping = async (html) => {
     const createFusion = (tr) => {
       const fusion = []
       for (let index = 3; index <= 6; index++) {
-        const split = getText(tr, index).trim().match(/^([0-9]*) ([\w. ]*)/)
+        const split = getText(tr, index).trim().match(/^([0-9]*) ([\w.'\- ]*)/)
         let name = getText(tr, index).trim()
         let count = 1
 

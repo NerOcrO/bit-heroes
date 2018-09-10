@@ -20,7 +20,7 @@ export const scrapping = async (html) => {
       return {
         type: utils.getType(firstRow.find('td')),
         avatar,
-        name: utils.getText(firstRow, 2),
+        name: utils.getText(firstRow, 2).replace(' ∴', ''),
         zone: utils.getText(thirdRow, 1),
         power: utils.getText(firstRow, 4).slice(0, -1),
         stamina: utils.getText(secondRow, 2).slice(0, -1),

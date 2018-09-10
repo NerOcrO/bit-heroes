@@ -115,6 +115,21 @@ td:nth-child(4),
 .desc::after {
   content: '⇩';
 }
+a.common {
+  color: #7eff7e;
+}
+a.rare {
+  color: #7e87f4;
+}
+a.epic {
+  color: #ff817e;
+}
+a.legendary {
+  color: #ffffb1;
+}
+a.mythic {
+  color: #8e546a;
+}
 .common td:nth-child(1) {
   background-color: #7eff7e;
 }

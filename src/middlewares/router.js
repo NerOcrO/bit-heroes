@@ -55,7 +55,7 @@ const selectFusions = data => data.reduce((accumulator, familiar) => {
     'Jumbo Syrum',
     'Mini Syrum',
     'Robot Sprocket',
-    "Hobbit's Foot",
+    'Hobbit Foot',
     'Demon Juice',
     'Wet Brainz',
     'Ninja Powah',
@@ -106,9 +106,12 @@ const displayFamiliars = async (request, response, page) => {
 
           familiar.fusion.map((requisite) => {
             const familiar = dataFamiliars.find(element => element.name === requisite.name)
+            requisite.url = 'fusions'
 
             if (familiar) {
               requisite.zone = ` (${familiar.zone})`
+              requisite.class = familiar.type.toLowerCase()
+              requisite.url = 'familiars'
             }
 
             return requisite

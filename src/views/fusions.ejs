@@ -52,7 +52,7 @@
             || locals.data[i].fusion[j].name.includes('Material')
             || locals.data[i].fusion[j].name.includes('Sprocket')
             || locals.data[i].fusion[j].name.includes('Syrum')
-            || locals.data[i].fusion[j].name.includes("Hobbit's Foot")
+            || locals.data[i].fusion[j].name.includes('Hobbit Foot')
             || locals.data[i].fusion[j].name.includes('Demon Juice')
             || locals.data[i].fusion[j].name.includes('Wet Brainz')
             || locals.data[i].fusion[j].name.includes('Ninja Powah')
@@ -65,13 +65,12 @@
           <li><%= new Intl.NumberFormat().format(locals.data[i].fusion[j].count) %> <%= locals.data[i].fusion[j].name %></li>
           <% }
           else
-          {
-            const name = locals.data[i].fusion[j].name
-            let url = 'familiars'
-            if (locals.data.find(data => data.name === name)) {
-              url = 'fusions'
-            } %>
-          <li><%= locals.data[i].fusion[j].count %> <a href="/<%= url %>#<%= locals.data[i].fusion[j].name.replace(/ /g, '') %>"><span><%= locals.data[i].fusion[j].name %></span></a><%= locals.data[i].fusion[j].zone %></li>
+          { %>
+          <li>
+            <%= locals.data[i].fusion[j].count %> <a class="<%= locals.data[i].fusion[j].class %>" href="/<%= locals.data[i].fusion[j].url %>#<%= locals.data[i].fusion[j].name.replace(/ /g, '') %>">
+              <%= locals.data[i].fusion[j].name %></a>
+            <%= locals.data[i].fusion[j].zone %>
+          </li>
           <% } %>
         <% } %>
         </ul>

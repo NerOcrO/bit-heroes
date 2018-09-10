@@ -153,7 +153,6 @@ const selectRows = () => {
       span.textContent === selectValues.selectSkill.content
       || selectValues.selectPassiveAbility && span.textContent === selectValues.selectPassiveAbility.content
       || selectValues.selectZone && span.textContent === selectValues.selectZone.content
-      || selectValues.selectFusion && span.textContent === selectValues.selectFusion.content
     ) {
       span.classList.add('highlight')
     }
