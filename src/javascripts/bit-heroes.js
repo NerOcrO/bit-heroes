@@ -128,6 +128,19 @@ const selectRows = () => {
     }
   })
 
+  $$('b').forEach((b) => {
+    b.classList.remove('highlight')
+
+    if (
+      b.textContent === selectValues.selectSkill.content
+      || selectValues.selectPassiveAbility && b.textContent === selectValues.selectPassiveAbility.content
+      || selectValues.selectZone && b.textContent === selectValues.selectZone.content
+      || selectValues.selectFusion && b.textContent === selectValues.selectFusion.content
+    ) {
+      b.classList.add('highlight')
+    }
+  })
+
   $$('#count').forEach((element) => {
     element.innerHTML = $$('tbody tr').length - $$('tr.invisible').length
   })
