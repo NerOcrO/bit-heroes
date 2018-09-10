@@ -33,14 +33,14 @@
       <% for (let j = 0; j < 5; j++) { %>
       <td>
         <% if (locals.data[i].skills[j]) { %>
-          <%= locals.data[i].skills[j].name %> (<%= locals.data[i].skills[j].skillPoint %>&nbsp;SP)<br><b><%= locals.data[i].skills[j].action %></b><br><%= locals.data[i].skills[j].pourcentage %>
+          <%= locals.data[i].skills[j].name %> (<%= locals.data[i].skills[j].skillPoint %>&nbsp;SP)<br><span><%= locals.data[i].skills[j].action %></span><br><%= locals.data[i].skills[j].pourcentage %>
         <% } %>
       </td>
       <% } %>
       <td>
         <ul>
           <% for (let j = 0; j < locals.data[i].passiveAbility.length; j++) { %>
-          <li><%= locals.data[i].passiveAbility[j].pourcentage %> <b><%= locals.data[i].passiveAbility[j].ability %></b></li>
+          <li><%= locals.data[i].passiveAbility[j].pourcentage %> <span><%= locals.data[i].passiveAbility[j].ability %></span></li>
           <% } %>
         </ul>
       </td>
@@ -71,7 +71,7 @@
             if (locals.data.find(data => data.name === name)) {
               url = 'fusions'
             } %>
-          <li><%= locals.data[i].fusion[j].count %> <a href="/<%= url %>#<%= locals.data[i].fusion[j].name.replace(/ /g, '') %>"><b><%= locals.data[i].fusion[j].name %></b></a><%= locals.data[i].fusion[j].zone %></li>
+          <li><%= locals.data[i].fusion[j].count %> <a href="/<%= url %>#<%= locals.data[i].fusion[j].name.replace(/ /g, '') %>"><span><%= locals.data[i].fusion[j].name %></span></a><%= locals.data[i].fusion[j].zone %></li>
           <% } %>
         <% } %>
         </ul>

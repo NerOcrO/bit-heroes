@@ -3,6 +3,24 @@
 const $ = selector => document.querySelector(selector)
 const $$ = selector => document.querySelectorAll(selector)
 
+const setStrongestAndWeakest = () => {
+  if ($('.mounts')) {
+    return
+  }
+
+  const tr = Array.from($$('tbody tr:not(.invisible)'))
+
+  $$('.strongest').forEach(element => element.classList.remove('strongest'))
+  $$('.weakest').forEach(element => element.classList.remove('weakest'))
+
+  for (let index = 3; index < 6; index++) {
+    const stats = tr.sort((a, b) => b.children[index].textContent - a.children[index].textContent)
+
+    stats[0].children[index].classList.add('strongest')
+    stats[[stats.length - 1]].children[index].classList.add('weakest')
+  }
+}
+
 function cleanTableHead(th) {
   th.classList.remove('focus')
 
@@ -128,22 +146,24 @@ const selectRows = () => {
     }
   })
 
-  $$('b').forEach((b) => {
-    b.classList.remove('highlight')
+  $$('tbody span').forEach((span) => {
+    span.classList.remove('highlight')
 
     if (
-      b.textContent === selectValues.selectSkill.content
-      || selectValues.selectPassiveAbility && b.textContent === selectValues.selectPassiveAbility.content
-      || selectValues.selectZone && b.textContent === selectValues.selectZone.content
-      || selectValues.selectFusion && b.textContent === selectValues.selectFusion.content
+      span.textContent === selectValues.selectSkill.content
+      || selectValues.selectPassiveAbility && span.textContent === selectValues.selectPassiveAbility.content
+      || selectValues.selectZone && span.textContent === selectValues.selectZone.content
+      || selectValues.selectFusion && span.textContent === selectValues.selectFusion.content
     ) {
-      b.classList.add('highlight')
+      span.classList.add('highlight')
     }
   })
 
   $$('#count').forEach((element) => {
     element.innerHTML = $$('tbody tr').length - $$('tr.invisible').length
   })
+
+  setStrongestAndWeakest()
 }
 
 const reset = () => {
@@ -164,3 +184,4 @@ const labels = Array.from($$('thead th')).map(th => th.innerText)
 $$('.table td').forEach((td, index) => {
   td.setAttribute('data-label', labels[index % labels.length])
 })
+setStrongestAndWeakest()

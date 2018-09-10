@@ -33,7 +33,7 @@ header li > a {
   text-shadow: -2px 0 #000, 0 2px #000, 2px 0 #000, 0 -2px #000;
 }
 header li > a:hover {
-  background-color: #f18829;
+  background-color: #3d5168;
   color: #fff;
   text-decoration: none;
 }
@@ -73,22 +73,27 @@ label {
 .reset {
   background-color: #9bd01e;
 }
+.table {
+  color: #fff;
+  text-shadow: -2px 0 #000, 0 2px #000, 2px 0 #000, 0 -2px #000;
+}
 .table td,
 .table th {
   vertical-align: middle;
 }
 th {
   background-color: #324254;
-  color: #fff;
   cursor: pointer;
   text-align: center;
-  text-shadow: -2px 0 #000, 0 2px #000, 2px 0 #000, 0 -2px #000;
 }
 th:hover {
-  background-color: #f18829;
+  background-color: #3d5168;
+}
+tr {
+  background-color: #282f37;
 }
 tr:hover {
-  background-color: #b8c2cf;
+  background-color: #313a44;
 }
 th:nth-child(2),
 td:nth-child(2) {
@@ -128,8 +133,14 @@ td:nth-child(4),
 .invisible {
   display: none;
 }
+.weakest {
+  color: #fe0000;
+  font-weight: 900;
+}
+.strongest,
 .highlight {
   color: #00fe00;
+  font-weight: 900;
 }
 footer {
   display: flex;
