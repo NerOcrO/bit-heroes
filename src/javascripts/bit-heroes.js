@@ -100,7 +100,6 @@ const selectRows = () => {
       flagPassiveAbility = true
 
       if (!tr.dataset.rawFusion.split(',').some(requisite => requisite === selectValue[4].content)) {
-
         flagFusion = false
       }
     }

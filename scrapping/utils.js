@@ -76,3 +76,15 @@ export const setSkills = (columns, firstRow, secondRow, thirdRow, type = 'famili
     }
     return accumulator
   }, [])
+
+/**
+ * @param {Object} row
+ *   The row.
+ *
+ * @return {string}
+ *   The item's type with uppercase's first letter.
+ */
+export const getType = (row) => {
+  const classType = row.attr('class')
+  return classType.charAt(0).toUpperCase() + classType.slice(1)
+}
