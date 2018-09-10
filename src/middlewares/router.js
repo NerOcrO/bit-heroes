@@ -37,6 +37,16 @@ const selectSkills = data => data.reduce((accumulator, familiar) => {
   return accumulator
 }, [])
 
+const selectZones = (data, index) => data.reduce((accumulator, familiar) => {
+  const text = familiar[index]
+
+  if (accumulator.every(zone => zone !== text)) {
+    accumulator.push(text)
+  }
+
+  return accumulator
+}, [])
+
 const selectFusions = data => data.reduce((accumulator, familiar) => {
   const materials = [
     'Common Material',
@@ -77,6 +87,9 @@ const displayFamiliars = async (request, response, page) => {
       if (page === 'fusions') {
         response.locals.selectPassiveAbility = selectpassiveAbility(data).sort()
         response.locals.selectFusion = selectFusions(data).sort()
+      }
+      else {
+        response.locals.selectZone = selectZones(data, 'zone').sort()
       }
 
       data = data.map((familiar) => {

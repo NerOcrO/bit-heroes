@@ -1,7 +1,7 @@
 <form class="form-row">
   <div class="form-group col-md-2">
-    <label for="typeSelect">Type</label>
-    <select id="typeSelect" name="typeSelect" class="form-control" data-columnId="1">
+    <label for="selectType">Type</label>
+    <select id="selectType" name="selectType" class="form-control">
       <option value="all">--All--</option>
       <% for (let i = 0; i < locals.selectType.length; i++) { %>
       <option value="<%= locals.selectType[i].toLowerCase() %>"><%= locals.selectType[i] %></option>
@@ -11,8 +11,8 @@
   <% if (locals.selectSkill) { %>
   and
   <div class="form-group col-md-2">
-    <label for="skill">Skill</label>
-    <select id="skill" name="skill" class="form-control" data-columnId="6">
+    <label for="selectSkill">Skill</label>
+    <select id="selectSkill" name="selectSkill" class="form-control">
       <option value="all">--All--</option>
       <% for (let i = 0; i < locals.selectSkill.length; i++) { %>
       <option value="<%= locals.selectSkill[i] %>"><%= locals.selectSkill[i] %></option>
@@ -22,7 +22,7 @@
   and
   <div class="form-group col-md-2">
     <label for="selectSkillPoint">Skill point</label>
-    <select id="selectSkillPoint" name="selectSkillPoint" class="form-control" data-columnId="11">
+    <select id="selectSkillPoint" name="selectSkillPoint" class="form-control">
       <option value="all">--All--</option>
       <option value="1">1</option>
       <option value="2">2</option>
@@ -31,11 +31,23 @@
     </select>
   </div>
   <% } %>
+  <% if (locals.selectZone) { %>
+  and
+  <div class="form-group col-md-2">
+    <label for="selectZone">Zone</label>
+    <select id="selectZone" name="selectZone" class="form-control">
+      <option value="all">--All--</option>
+      <% for (let i = 0; i < locals.selectZone.length; i++) { %>
+      <option value="<%= locals.selectZone[i] %>"><%= locals.selectZone[i] %></option>
+      <% } %>
+    </select>
+  </div>
+  <% } %>
   <% if (locals.selectPassiveAbility) { %>
   and
   <div class="form-group col-md-2">
     <label for="selectPassiveAbility">Passive ability</label>
-    <select id="selectPassiveAbility" name="selectPassiveAbility" class="form-control" data-columnId="11">
+    <select id="selectPassiveAbility" name="selectPassiveAbility" class="form-control">
       <option value="all">--All--</option>
       <% for (let i = 0; i < locals.selectPassiveAbility.length; i++) { %>
       <option value="<%= locals.selectPassiveAbility[i] %>"><%= locals.selectPassiveAbility[i] %></option>
@@ -47,7 +59,7 @@
   or
   <div class="form-group col-md-2">
     <label for="selectFusion">Fusion</label>
-    <select id="selectFusion" name="selectFusion" class="form-control" data-columnId="12">
+    <select id="selectFusion" name="selectFusion" class="form-control">
       <option value="all">--All--</option>
       <% for (let i = 0; i < locals.selectFusion.length; i++) { %>
       <option value="<%= locals.selectFusion[i] %>"><%= locals.selectFusion[i] %></option>

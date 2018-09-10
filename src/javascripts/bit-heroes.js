@@ -48,58 +48,68 @@ const sortTableRow = (event) => {
 }
 
 const selectRows = () => {
-  const selectValue = []
+  const selectValues = {}
 
   $$('select').forEach((select) => {
-    selectValue.push({ content: select.value, columnId: select.dataset.columnid })
+    selectValues[select.name] = { content: select.value }
   })
 
   $$('tbody tr').forEach((tr) => {
     let flagType = true
     let flagSkill = true
+    let flagZone = true
     let flagPassiveAbility = true
     let flagFusion = true
 
     if (
-      selectValue[0]
-      && selectValue[0].content !== 'all'
-      && tr.classList[0] !== selectValue[0].content
+      selectValues.selectType
+      && selectValues.selectType.content !== 'all'
+      && tr.classList[0] !== selectValues.selectType.content
     ) {
       flagType = false
     }
 
     if (
-      selectValue[1]
+      selectValues.selectSkill
       && (
-        selectValue[1].content !== 'all'
-        && !tr.dataset.rawSkills.split(',').some(skill => skill.slice(2) === selectValue[1].content)
-        || selectValue[1].content !== 'all'
-        && selectValue[2].content !== 'all'
-        && !tr.dataset.rawSkills.split(',').some(skill => skill.slice(2) === selectValue[1].content && skill.slice(0, 1) === selectValue[2].content)
-        ||selectValue[2].content !== 'all'
-        && !tr.dataset.rawSkills.split(',').some(skill => skill.slice(0, 1) === selectValue[2].content)
+        selectValues.selectSkill.content !== 'all'
+        && !tr.dataset.rawSkills.split(',').some(skill => skill.slice(2) === selectValues.selectSkill.content)
+        || selectValues.selectSkill.content !== 'all'
+        && selectValues.selectSkillPoint.content !== 'all'
+        && !tr.dataset.rawSkills.split(',').some(skill => skill.slice(2) === selectValues.selectSkill.content && skill.slice(0, 1) === selectValues.selectSkillPoint.content)
+        ||selectValues.selectSkillPoint.content !== 'all'
+        && !tr.dataset.rawSkills.split(',').some(skill => skill.slice(0, 1) === selectValues.selectSkillPoint.content)
       )
     ) {
       flagSkill = false
     }
 
     if (
-      selectValue[3]
-      && selectValue[3].content !== 'all'
-      && !tr.dataset.rawPassiveAbilities.split(',').some(passiveAbility => passiveAbility === selectValue[3].content)
+      selectValues.selectZone
+      && selectValues.selectZone.content !== 'all'
+      && tr.dataset.rawZone !== selectValues.selectZone.content
+    ) {
+      flagZone = false
+    }
+
+    if (
+      selectValues.selectPassiveAbility
+      && selectValues.selectPassiveAbility.content !== 'all'
+      && !tr.dataset.rawPassiveAbilities.split(',').some(passiveAbility => passiveAbility === selectValues.selectPassiveAbility.content)
     ) {
       flagPassiveAbility = false
     }
 
     if (
-      selectValue[4]
-      && selectValue[4].content !== 'all'
+      selectValues.selectFusion
+      && selectValues.selectFusion.content !== 'all'
     ) {
       flagType = true
       flagSkill = true
+      flagZone = true
       flagPassiveAbility = true
 
-      if (!tr.dataset.rawFusion.split(',').some(requisite => requisite === selectValue[4].content)) {
+      if (!tr.dataset.rawFusion.split(',').some(requisite => requisite === selectValues.selectFusion.content)) {
         flagFusion = false
       }
     }
@@ -107,6 +117,7 @@ const selectRows = () => {
     if (
       flagType
       && flagSkill
+      && flagZone
       && flagPassiveAbility
       && flagFusion
     ) {
