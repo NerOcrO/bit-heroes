@@ -60,14 +60,14 @@ export const scrapping = async (html) => {
 
     for (let index = 0; index < each; index++) {
       informations.push(
-        {
+        [{
           count: $(`article table:nth-of-type(${tableId}) tr:nth-of-type(${map[type].rowId}) td:nth-of-type(${tdId + index})`).text().trim(),
           material: 'Mount guts',
         },
         {
           count: $(`article table:nth-of-type(${tableId}) tr:nth-of-type(${map[type].rowId + 1}) td:nth-of-type(${tdId - 1 + index})`).text().trim(),
           material: map[type].material,
-        },
+        }],
       )
     }
 

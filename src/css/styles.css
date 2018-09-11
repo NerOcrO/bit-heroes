@@ -169,6 +169,25 @@ footer div {
   position: fixed;
   z-index: 1030;
 }
+.material {
+  font-size: 0;
+  height: 20px;
+  margin-left: 5px;
+  position: absolute;
+  width: 20px;
+}
+.mount-guts {
+  background: url(/mount-guts.png) no-repeat 1px center #fff;
+}
+.common-material {
+  background: url(/common-material.png) no-repeat 1px center #fff;
+}
+.rare-material {
+  background: url(/rare-material.png) no-repeat 1px center #fff;
+}
+.epic-material {
+  background: url(/epic-material.png) no-repeat 1px center #fff;
+}
 
 @media only screen and (max-width: 800px) {
   .fixed-top {
