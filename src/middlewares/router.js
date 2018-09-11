@@ -2,6 +2,7 @@ import express from 'express'
 import fs from 'fs'
 
 const router = express.Router()
+const wikiUrl = 'http://bit-heroes.wikia.com/wiki/'
 
 const selectType = (data, index) => data.reduce((accumulator, familiar) => {
   const text = familiar[index].replace(/[0-9.]*% /g, '')
@@ -127,6 +128,7 @@ const displayFamiliars = async (request, response, page) => {
         data,
         csrfToken: request.csrfToken(),
         count: data.length,
+        wikiUrl: `${wikiUrl + page}`,
       })
     })
     .catch(error => console.log(error))
@@ -153,6 +155,7 @@ const displayMounts = async (request, response, page) => {
         data,
         csrfToken: request.csrfToken(),
         count: data.length,
+        wikiUrl: `${wikiUrl + page}`,
       })
     })
     .catch(error => console.log(error))
