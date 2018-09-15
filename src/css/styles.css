@@ -188,6 +188,9 @@ footer div {
 .epic-material {
   background: url(/epic-material.png) no-repeat 1px center #fff;
 }
+.gold {
+  background: url(/gold.png) no-repeat 1px center #fff;
+}
 
 @media only screen and (max-width: 800px) {
   .fixed-top {

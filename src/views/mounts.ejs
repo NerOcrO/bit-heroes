@@ -36,8 +36,9 @@
       <td><%= locals.data[i].skill %></td>
       <td>
         <% for (let j = 0; j < locals.data[i].purchase.length; j++) { %>
-          <%= locals.data[i].purchase[j][0].count %> <span class="material mount-guts"><%= locals.data[i].purchase[j][0].material %></span><br>
-          <%= locals.data[i].purchase[j][1].count %> <span class="material <%= locals.data[i].purchase[j][1].material.toLowerCase().replace(' ', '-') %>"><%= locals.data[i].purchase[j][1].material %></span>
+          <%= new Intl.NumberFormat().format(locals.data[i].purchase[j][0].count) %> <span class="material <%= locals.data[i].purchase[j][0].material.toLowerCase().replace(' ', '-') %>"><%= locals.data[i].purchase[j][0].material %></span><br>
+          <%= locals.data[i].purchase[j][1].count %> <span class="material mount-guts"><%= locals.data[i].purchase[j][1].material %></span><br>
+          <%= locals.data[i].purchase[j][2].count %> <span class="material <%= locals.data[i].purchase[j][2].material.toLowerCase().replace(' ', '-') %>"><%= locals.data[i].purchase[j][2].material %></span>
         <% } %>
       </td>
       <%
