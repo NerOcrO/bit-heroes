@@ -191,6 +191,10 @@ footer div {
 .gold {
   background: url(/gold.png) no-repeat 1px center #fff;
 }
+.external {
+  background: url(/external-link.png) no-repeat center right;
+  padding-right: 15px;
+}
 
 @media only screen and (max-width: 800px) {
   .fixed-top {
@@ -244,5 +248,8 @@ footer div {
   }
   .table th + td {
     padding-left: 10px;
+  }
+  footer {
+    display: block;
   }
 }

@@ -47,16 +47,6 @@ export const scrapping = async (html) => {
       each += 1
       tdId -= 1
     }
-    else if (information === 'reroll') {
-      tableId += 2
-      tdId -= 1
-      if (type === 'Legendary') {
-        each = 4
-      }
-      else {
-        each = 3
-      }
-    }
 
     for (let index = 0; index < each; index++) {
       const info = [{
@@ -107,7 +97,6 @@ export const scrapping = async (html) => {
       purchase: getInformations(type, 'purchase'),
       upgrades: getInformations(type),
       exchanges: getInformations(type, 'exchange'),
-      reroll: getInformations(type, 'reroll'),
     }
   }
 

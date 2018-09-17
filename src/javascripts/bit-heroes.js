@@ -10,6 +10,10 @@ const setStrongestAndWeakest = () => {
 
   const tr = Array.from($$('tbody tr:not(.invisible)'))
 
+  if (tr.length === 0) {
+    return
+  }
+
   $$('.strongest').forEach(element => element.classList.remove('strongest'))
   $$('.weakest').forEach(element => element.classList.remove('weakest'))
 
@@ -171,11 +175,35 @@ const reset = () => {
     select.value = 'all'
     select.dispatchEvent(event)
   })
+  if ($('.reroll-formula')) {
+    $('.reroll-formula').innerHTML = ''
+  }
+}
+
+const showRerollFormula = (event) => {
+  let mountGguts = 2
+  let material = '100 <img src="/common-material.png" alt="Common material">'
+
+  if (event.currentTarget.value === 'rare') {
+    mountGguts = 8
+    material = '50 <img src="/rare-material.png" alt="Rare material">'
+  }
+  else if (event.currentTarget.value === 'epic') {
+    mountGguts = 40
+    material = '4 <img src="/epic-material.png" alt="Epic material">'
+  }
+  else if (event.currentTarget.value === 'legendary') {
+    mountGguts = 200
+    material = '10 <img src="/epic-material.png" alt="Epic material">'
+  }
+
+  $('.reroll-formula').innerHTML = `Reroll's formula: [nth-reroll] * <b>${mountGguts}</b> <img src="/mount-guts.png" alt="Mount guts"> + [nth-reroll] * <b>${material}</b>`
 }
 
 $('.submit').classList.add('invisible')
 $('.reset').addEventListener('click', reset)
 $$('select').forEach(option => option.addEventListener('change', selectRows))
+$$('.mounts select').forEach(option => option.addEventListener('change', showRerollFormula))
 $$('th').forEach(th => th.addEventListener('click', sortTableRow))
 
 // For responsive.

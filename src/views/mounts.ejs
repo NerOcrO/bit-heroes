@@ -1,8 +1,9 @@
 <%- include('familiars-filters') %>
-<table class="table table-bordered mounts">
+<p class="reroll-formula"></p>
+<table class="table table-bordered">
   <thead>
     <tr>
-      <th id="count" title="<%= locals.count %> mounts"><%= locals.count %></th>
+      <th id="count" title="<%= locals.count %>"><%= locals.count %></th>
       <th id="type" class="asc focus">Type</th>
       <th id="name" class="asc">Name</th>
       <th id="moveSpeed" class="asc">Move speed&nbsp;(%)</th>
@@ -19,10 +20,6 @@
       <th id="exchange3" class="asc" title="Exchange 3">Exchnge&nbsp;3</th>
       <th id="exchange4" class="asc" title="Exchange 4">Exchnge&nbsp;4</th>
       <th id="exchange5" class="asc" title="Exchange 5">Exchnge&nbsp;5</th>
-      <th id="reroll1" class="asc" title="Reroll 1">Rer&nbsp;1</th>
-      <th id="reroll2" class="asc" title="Reroll 5">Rer&nbsp;2</th>
-      <th id="reroll3" class="asc" title="Reroll 3">Rer&nbsp;3</th>
-      <th id="reroll4" class="asc" title="Reroll 4">Rer&nbsp;4</th>
     </tr>
   </thead>
   <tbody>
@@ -70,20 +67,12 @@
         <% } %>
       </td>
       <% } %>
-      <% for (let j = 0; j < 4; j++) { %>
-      <td>
-        <% if (locals.data[i].reroll[j]) { %>
-          <%= locals.data[i].reroll[j][0].count %> <span class="material mount-guts"><%= locals.data[i].reroll[j][0].material %></span><br>
-          <%= locals.data[i].reroll[j][1].count %> <span class="material <%= locals.data[i].reroll[j][1].material.toLowerCase().replace(' ', '-') %>"><%= locals.data[i].reroll[j][1].material %></span>
-        <% } %>
-      </td>
-      <% } %>
     </tr>
     <% } %>
   </tbody>
   <tfoot>
     <tr>
-      <th id="count" title="<%= locals.count %> mounts"><%= locals.count %></th>
+      <th id="count" title="<%= locals.count %>"><%= locals.count %></th>
       <th id="type" class="asc focus">Type</th>
       <th id="name" class="asc">Name</th>
       <th id="moveSpeed" class="asc">Move speed&nbsp;(%)</th>
@@ -100,10 +89,6 @@
       <th id="exchange3" class="asc" title="Exchange 3">Exc 3</th>
       <th id="exchange4" class="asc" title="Exchange 4">Exc 4</th>
       <th id="exchange5" class="asc" title="Exchange 5">Exc 5</th>
-      <th id="reroll1" class="asc" title="Reroll 1">Rer 1</th>
-      <th id="reroll2" class="asc" title="Reroll 5">Rer 2</th>
-      <th id="reroll3" class="asc" title="Reroll 3">Rer 3</th>
-      <th id="reroll4" class="asc" title="Reroll 4">Rer 4</th>
     </tr>
   </tfoot>
 </table>
