@@ -28,40 +28,33 @@ const createFusion = (familiar) => {
   return { name, count }
 }
 
+const setFamiliar = async (firstRow, secondRow, thirdRow) => {
+  const avatar = await utils.getAvatarBase64(firstRow.find('span img').attr('data-src'))
+
+  return {
+    type: utils.getType(firstRow.find('td')),
+    avatar,
+    name: utils.getText(firstRow, 2),
+    fusion: utils.getText(thirdRow, 1).split('+').map(createFusion),
+    passiveAbility: setPassiveAbility(utils.getText(secondRow, 1)),
+    power: utils.getText(firstRow, 4).slice(0, -1),
+    stamina: utils.getText(secondRow, 3).slice(0, -1),
+    agility: utils.getText(thirdRow, 3).slice(0, -1),
+    attack: utils.setSkill(firstRow, secondRow, thirdRow, 5, 'fusion'),
+    skills: utils.setSkills([6, 7, 8, 9, 10], firstRow, secondRow, thirdRow, 'fusion'),
+  }
+}
+
 export const urlWiki = 'http://bit-heroes.wikia.com/wiki/Fusion'
 
 export const scrapping = async (html) => {
   const $ = cheerio.load(html)
   const familiars = []
+  const excludeUselessTr = (index, element) => (index < 3 || index > 488 || $(element).children().length === 1 ? $(element) : null)
+  const tr = $('article tr').not(excludeUselessTr)
 
-  const setFamiliars = (tr) => {
-    const setFamiliar = async (index) => {
-      const firstRow = $(tr[index])
-      const secondRow = $(tr[index + 1])
-      const thirdRow = $(tr[index + 2])
-      const avatar = await utils.getAvatarBase64(firstRow.find('span img').attr('data-src'))
-
-      return {
-        type: utils.getType(firstRow.find('td')),
-        avatar,
-        name: utils.getText(firstRow, 2),
-        fusion: utils.getText(thirdRow, 1).split('+').map(createFusion),
-        passiveAbility: setPassiveAbility(utils.getText(secondRow, 1)),
-        power: utils.getText(firstRow, 4).slice(0, -1),
-        stamina: utils.getText(secondRow, 3).slice(0, -1),
-        agility: utils.getText(thirdRow, 3).slice(0, -1),
-        attack: utils.setSkill(firstRow, secondRow, thirdRow, 5, 'fusion'),
-        skills: utils.setSkills([6, 7, 8, 9, 10], firstRow, secondRow, thirdRow, 'fusion'),
-      }
-    }
-
-    for (let index = 1; index < tr.length; index += 3) {
-      familiars.push(setFamiliar(index))
-    }
-  }
-
-  for (let index = 2; index < $('article table').length; index++) {
-    setFamiliars($(`article table:nth-of-type(${index}) tr`))
+  for (let index = 0; index < tr.length; index += 3) {
+    familiars.push(setFamiliar($(tr[index]), $(tr[index + 1]), $(tr[index + 2])))
   }
 
   fs.promises.writeFile('data/fusions.json', JSON.stringify(await Promise.all(familiars)), 'utf8')

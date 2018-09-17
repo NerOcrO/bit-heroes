@@ -1,4 +1,4 @@
 {
   "exec": "babel-node",
-  "ignore": ["tests/*", "public/*", "src/javascripts/*"]
+  "ignore": ["tests/*", "public/*", "src/javascripts/*", "data/*", "scrapping/*"]
 }

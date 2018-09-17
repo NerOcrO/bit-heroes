@@ -6,9 +6,9 @@ export const urlWiki = 'http://bit-heroes.wikia.com/wiki/Mounts'
 
 export const scrapping = async (html) => {
   const $ = cheerio.load(html)
-  const mounts = []
 
-  $('noscript').remove()
+  const tr = $('article table:nth-of-type(3) tr')
+    .not((index, element) => (index === 0 ? $(element) : null))
 
   const getInformations = (type, information = 'upgrade') => {
     const informations = []
@@ -93,31 +93,30 @@ export const scrapping = async (html) => {
     return informations
   }
 
-  const setMounts = (tr) => {
-    const setMount = async (row) => {
-      const avatar = await utils.getAvatarBase64(row.find('span img').attr('data-src'))
-      const type = utils.getType(row)
+  const setMount = async (row) => {
+    const avatar = await utils.getAvatarBase64(row.find('span img').attr('data-src'))
+    const type = utils.getType(row)
 
-      return {
-        type,
-        avatar,
-        name: utils.getText(row, 2).replace(/\[[0-9]\]/, ''),
-        moveSpeed: utils.getText(row, 3).slice(1, -1),
-        bonus: utils.getText(row, 4).replace(/\[[0-9]\]/, ''),
-        skill: utils.getText(row, 5),
-        purchase: getInformations(type, 'purchase'),
-        upgrades: getInformations(type),
-        exchanges: getInformations(type, 'exchange'),
-        reroll: getInformations(type, 'reroll'),
-      }
-    }
-
-    for (let index = 1; index < tr.length; index++) {
-      mounts.push(setMount($(tr[index])))
+    return {
+      type,
+      avatar,
+      name: utils.getText(row, 2).replace(/\[[0-9]\]/, ''),
+      moveSpeed: utils.getText(row, 3).slice(1, -1),
+      bonus: utils.getText(row, 4).replace(/\[[0-9]\]/, ''),
+      skill: utils.getText(row, 5),
+      purchase: getInformations(type, 'purchase'),
+      upgrades: getInformations(type),
+      exchanges: getInformations(type, 'exchange'),
+      reroll: getInformations(type, 'reroll'),
     }
   }
 
-  setMounts($('article table:nth-of-type(3) tr'))
+  $('noscript').remove()
 
-  fs.promises.writeFile('data/mounts.json', JSON.stringify(await Promise.all(mounts)), 'utf8')
+  const mounts = await Promise.all(
+    [...Array(tr.length)]
+      .map((element, index) => setMount($(tr[index])))
+  )
+
+  fs.promises.writeFile('data/mounts.json', JSON.stringify(mounts), 'utf8')
 }
