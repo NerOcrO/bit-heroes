@@ -4,8 +4,15 @@ import fs from 'fs'
 const router = express.Router()
 const wikiUrl = 'http://bit-heroes.wikia.com/wiki/'
 
-const selectType = (data, index) => data.reduce((accumulator, familiar) => {
-  const text = familiar[index].replace(/[0-9.]*% /g, '')
+const setSimpleSelect = (data, index) => data.reduce((accumulator, familiar) => {
+  let text = ''
+
+  if (index === 'type') {
+    text = familiar[index].replace(/[0-9.]*% /g, '')
+  }
+  else if (index === 'zone') {
+    text = familiar[index]
+  }
 
   if (accumulator.every(type => type !== text)) {
     accumulator.push(text)
@@ -14,63 +21,43 @@ const selectType = (data, index) => data.reduce((accumulator, familiar) => {
   return accumulator
 }, [])
 
-const selectpassiveAbility = data => data.reduce((accumulator, familiar) => {
-  familiar.passiveAbility.forEach((passiveAbility) => {
-    const text = passiveAbility.ability.replace(/[0-9.%]*/, '')
+const setComplexSelect = (data, index) => data.reduce((accumulator, familiar) => {
+  familiar[index].forEach((element) => {
+    let text = ''
+    let validation = type => type !== text
 
-    if (accumulator.every(type => type !== text)) {
+    if (index === 'passiveAbility') {
+      text = element.ability.replace(/[0-9.%]*/, '')
+    }
+    else if (index === 'skills') {
+      text = element.action
+    }
+    else if (index === 'fusion') {
+      const materials = [
+        'Common Material',
+        'Rare Material',
+        'Epic Material',
+        'Jumbo Syrum',
+        'Mini Syrum',
+        'Robot Sprocket',
+        'Hobbit Foot',
+        'Demon Juice',
+        'Wet Brainz',
+        'Ninja Powah',
+        'Ginger Snaps',
+        'Jelly Donut',
+        'Ectoplasm',
+        'Demon Hide',
+        'Bacon',
+        'Gold',
+      ]
+
+      text = element.name
+      validation = type => type !== text && materials.every(material => material !== text)
+    }
+
+    if (accumulator.every(validation)) {
       accumulator.push(text)
-    }
-  })
-
-  return accumulator
-}, [])
-
-const selectSkills = data => data.reduce((accumulator, familiar) => {
-  familiar.skills.forEach((skill) => {
-    if (skill.action) {
-      if (accumulator.every(type => type !== skill.action)) {
-        accumulator.push(skill.action)
-      }
-    }
-  })
-
-  return accumulator
-}, [])
-
-const selectZones = (data, index) => data.reduce((accumulator, familiar) => {
-  const text = familiar[index]
-
-  if (accumulator.every(zone => zone !== text)) {
-    accumulator.push(text)
-  }
-
-  return accumulator
-}, [])
-
-const selectFusions = data => data.reduce((accumulator, familiar) => {
-  const materials = [
-    'Common Material',
-    'Rare Material',
-    'Epic Material',
-    'Jumbo Syrum',
-    'Mini Syrum',
-    'Robot Sprocket',
-    'Hobbit Foot',
-    'Demon Juice',
-    'Wet Brainz',
-    'Ninja Powah',
-    'Ginger Snaps',
-    'Jelly Donut',
-    'Ectoplasm',
-    'Demon Hide',
-    'Bacon',
-    'Gold',
-  ]
-
-  familiar.fusion.forEach((fusion) => {
-    if (accumulator.every(type => type !== fusion.name && materials.every(material => material !== fusion.name))) {
-      accumulator.push(fusion.name)
     }
   })
 
@@ -82,15 +69,15 @@ const displayFamiliars = async (request, response, page) => {
     .then(async (rawData) => {
       let data = JSON.parse(rawData)
 
-      response.locals.selectType = selectType(data, 'type')
-      response.locals.selectSkill = selectSkills(data).sort()
+      response.locals.selectType = setSimpleSelect(data, 'type')
+      response.locals.selectSkill = setComplexSelect(data, 'skills').sort()
 
       if (page === 'fusions') {
-        response.locals.selectPassiveAbility = selectpassiveAbility(data).sort()
-        response.locals.selectFusion = selectFusions(data).sort()
+        response.locals.selectPassiveAbility = setComplexSelect(data, 'passiveAbility').sort()
+        response.locals.selectFusion = setComplexSelect(data, 'fusion').sort()
       }
       else {
-        response.locals.selectZone = selectZones(data, 'zone').sort()
+        response.locals.selectZone = setSimpleSelect(data, 'zone').sort()
       }
 
       if (page === 'fusions') {
@@ -147,7 +134,7 @@ const displayMounts = async (request, response, page) => {
     .then((rawData) => {
       const data = JSON.parse(rawData)
 
-      response.locals.selectType = selectType(data, 'type')
+      response.locals.selectType = setSimpleSelect(data, 'type')
 
       response.render('layout', {
         view: page,
