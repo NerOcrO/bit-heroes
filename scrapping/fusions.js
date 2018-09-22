@@ -5,12 +5,12 @@ import * as utils from './utils'
 const setPassiveAbility = (rowAbilities) => {
   const abilities = rowAbilities.split(',')
 
-  return abilities.map((ability) => {
-    const split = ability.trim().match(/^([0-9.]*%) ([\w .%-]*)/)
+  return abilities.map((rawAbility) => {
+    const [, pourcentage, ability] = rawAbility.match(/^ ?([0-9.]*%) ([\w .%-]*)/)
 
     return {
-      pourcentage: split[1],
-      ability: split[2],
+      pourcentage,
+      ability,
     }
   })
 }
