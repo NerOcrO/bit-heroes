@@ -15,19 +15,6 @@ const setPassiveAbility = (rowAbilities) => {
   })
 }
 
-const createFusion = (familiar) => {
-  const split = familiar.trim().match(/^([0-9]*) ([\w. ]*)/)
-  let name = familiar.trim()
-  let count = 1
-
-  if (split !== null) {
-    name = split[2].trim()
-    count = split[1]
-  }
-
-  return { name, count }
-}
-
 const setSchematicPlace = (tr) => {
   let schematicPlace = tr.parents('table').prev('h3').find('.mw-headline').text()
 
@@ -45,7 +32,7 @@ const setFamiliar = async (firstRow, secondRow, thirdRow) => {
     type: utils.getType(firstRow.find('td')),
     avatar,
     name: utils.getText(firstRow, 2),
-    fusion: utils.getText(thirdRow, 1).split('+').map(createFusion),
+    fusion: {},
     passiveAbility: setPassiveAbility(utils.getText(secondRow, 1)),
     power: utils.getText(firstRow, 4).slice(0, -1),
     stamina: utils.getText(secondRow, 3).slice(0, -1),

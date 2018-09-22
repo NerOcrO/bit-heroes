@@ -69,8 +69,7 @@
           else
           { %>
           <li>
-            <%= locals.data[i].fusion[j].count %>&nbsp;<a class="<%= locals.data[i].fusion[j].class %>" href="/<%= locals.data[i].fusion[j].url %>#<%= locals.data[i].fusion[j].name.replace(/ /g, '') %>">
-              <%= locals.data[i].fusion[j].name %></a>&nbsp;<%= locals.data[i].fusion[j].zone %>
+            <%= locals.data[i].fusion[j].count %>&nbsp;<a class="<%= locals.data[i].fusion[j].class %>" href="/<%= locals.data[i].fusion[j].url %>#<%= locals.data[i].fusion[j].name.replace(/ /g, '') %>"><%= locals.data[i].fusion[j].name %></a>&nbsp;<%= locals.data[i].fusion[j].zone %>
           </li>
           <% } %>
         <% } %>

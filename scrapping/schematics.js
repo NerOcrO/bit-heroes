@@ -6,16 +6,12 @@ const createFusion = (tr) => {
   const fusion = []
 
   for (let index = 3; index <= 6; index++) {
-    const split = getText(tr, index).trim().match(/^([0-9]*) ([\w.'\- ]*)/)
-    let name = getText(tr, index).trim()
-    let count = 1
+    const [, count, name] = getText(tr, index).match(/^([0-9]+ )?([\w.'\- ]*)/)
 
-    if (split !== null) {
-      name = split[2].trim()
-      count = split[1]
-    }
-
-    fusion.push({ name, count })
+    fusion.push({
+      count: count !== undefined ? count.trim() : 1,
+      name,
+    })
   }
 
   return fusion
