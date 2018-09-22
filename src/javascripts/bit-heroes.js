@@ -81,6 +81,7 @@ const selectRows = () => {
     let flagSkill = true
     let flagZone = true
     let flagPassiveAbility = true
+    let flagSchematicPlace = true
     let flagFusion = true
 
     if (
@@ -123,6 +124,14 @@ const selectRows = () => {
     }
 
     if (
+      selectValues.selectSchematicPlace
+      && selectValues.selectSchematicPlace.content !== 'all'
+      && tr.dataset.rawSchematicPlace !== selectValues.selectSchematicPlace.content
+    ) {
+      flagSchematicPlace = false
+    }
+
+    if (
       selectValues.selectFusion
       && selectValues.selectFusion.content !== 'all'
     ) {
@@ -130,6 +139,7 @@ const selectRows = () => {
       flagSkill = true
       flagZone = true
       flagPassiveAbility = true
+      flagSchematicPlace = true
 
       if (!tr.dataset.rawFusion.split(',').some(requisite => requisite === selectValues.selectFusion.content)) {
         flagFusion = false
@@ -141,6 +151,7 @@ const selectRows = () => {
       && flagSkill
       && flagZone
       && flagPassiveAbility
+      && flagSchematicPlace
       && flagFusion
     ) {
       tr.classList.remove('invisible')
@@ -157,6 +168,7 @@ const selectRows = () => {
       span.textContent === selectValues.selectSkill.content
       || selectValues.selectPassiveAbility && span.textContent === selectValues.selectPassiveAbility.content
       || selectValues.selectZone && span.textContent === selectValues.selectZone.content
+      || selectValues.selectSchematicPlace && span.textContent === selectValues.selectSchematicPlace.content
     ) {
       span.classList.add('highlight')
     }

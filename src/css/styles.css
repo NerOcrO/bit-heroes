@@ -101,9 +101,26 @@ td:nth-child(2) {
 }
 td:nth-child(1),
 td:nth-child(4),
+.fusions td:nth-child(5),
+.fusions td:nth-child(6),
 .familiars td:nth-child(5),
-.familiars td:nth-child(6) {
+.familiars td:nth-child(6),
+.familiars td:nth-child(11) {
   text-align: center;
+}
+.mounts td:nth-child(7),
+.mounts td:nth-child(8),
+.mounts td:nth-child(9),
+.mounts td:nth-child(10),
+.mounts td:nth-child(11),
+.mounts td:nth-child(12),
+.mounts td:nth-child(13),
+.mounts td:nth-child(14),
+.mounts td:nth-child(15),
+.mounts td:nth-child(16),
+.mounts td:nth-child(17) {
+  padding-right: 2rem;
+  text-align: right;
 }
 .focus {
   background-color: #f18829;
@@ -170,26 +187,67 @@ footer div {
   z-index: 1030;
 }
 .material {
+  background-repeat: no-repeat;
+  background-position: center center;
   font-size: 0;
   height: 20px;
   margin-left: 5px;
   position: absolute;
   width: 20px;
 }
+.gold {
+  background-image: url(/gold.png);
+}
 .mount-guts {
-  background: url(/mount-guts.png) no-repeat 1px center #fff;
+  background-image: url(/mount-guts.png);
 }
 .common-material {
-  background: url(/common-material.png) no-repeat 1px center #fff;
+  background-image: url(/common-material.png);
 }
 .rare-material {
-  background: url(/rare-material.png) no-repeat 1px center #fff;
+  background-image: url(/rare-material.png);
 }
 .epic-material {
-  background: url(/epic-material.png) no-repeat 1px center #fff;
+  background-image: url(/epic-material.png);
 }
-.gold {
-  background: url(/gold.png) no-repeat 1px center #fff;
+.bacon {
+  background-image: url(/bacon.png);
+}
+.demon-hide {
+  background-image: url(/demon-hide.png);
+}
+.demon-juice {
+  background-image: url(/demon-juice.png);
+}
+.ectoplasm {
+  background-image: url(/ectoplasm.png);
+}
+.ginger-snaps {
+  background-image: url(/ginger-snaps.png);
+}
+.hobbit-foot {
+  background-image: url(/hobbit-foot.png);
+}
+.jelly-donut {
+  background-image: url(/jelly-donut.png);
+}
+.jumbo-syrum {
+  background-image: url(/jumbo-syrum.png);
+}
+.mini-syrum {
+  background-image: url(/mini-syrum.png);
+}
+.mini-syrum {
+  background-image: url(/mini-syrum.png);
+}
+.ninja-powah {
+  background-image: url(/ninja-powah.png);
+}
+.robot-sprocket {
+  background-image: url(/robot-sprocket.png);
+}
+.wet-brainz {
+  background-image: url(/wet-brainz.png);
 }
 .external {
   background: url(/external-link.png) no-repeat center right;
@@ -222,12 +280,6 @@ footer div {
     margin-top: -1px;
     padding-left: 150px;
     position: relative;
-  }
-  .table tr:nth-child(even) {
-    background-color: #9fa9b5;
-  }
-  .table td:nth-child(even) {
-    background-color: #b8c2cf;
   }
   .table td::before {
     align-items: center;

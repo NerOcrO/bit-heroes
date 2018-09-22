@@ -28,6 +28,16 @@ const createFusion = (familiar) => {
   return { name, count }
 }
 
+const setSchematicPlace = (tr) => {
+  let schematicPlace = tr.parents('table').prev('h3').find('.mw-headline').text()
+
+  if (schematicPlace.match(/[Common||Rare||Epic||Legendary||Mythic] fusions/)) {
+    schematicPlace = 'Regular'
+  }
+
+  return schematicPlace
+}
+
 const setFamiliar = async (firstRow, secondRow, thirdRow) => {
   const avatar = await utils.getAvatarBase64(firstRow.find('span img').attr('data-src'))
 
@@ -42,6 +52,7 @@ const setFamiliar = async (firstRow, secondRow, thirdRow) => {
     agility: utils.getText(thirdRow, 3).slice(0, -1),
     attack: utils.setSkill(firstRow, secondRow, thirdRow, 5, 'fusion'),
     skills: utils.setSkills([6, 7, 8, 9, 10], firstRow, secondRow, thirdRow, 'fusion'),
+    schematicPlace: setSchematicPlace(firstRow),
   }
 }
 

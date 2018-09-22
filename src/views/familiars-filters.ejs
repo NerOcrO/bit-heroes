@@ -1,5 +1,5 @@
 <form class="form-row">
-  <div class="form-group col-md-2">
+  <div class="form-group col-md-1">
     <label for="selectType">Type</label>
     <select id="selectType" name="selectType" class="form-control">
       <option value="all">--All--</option>
@@ -20,7 +20,7 @@
     </select>
   </div>
   and
-  <div class="form-group col-md-2">
+  <div class="form-group col-md-1">
     <label for="selectSkillPoint">Skill point</label>
     <select id="selectSkillPoint" name="selectSkillPoint" class="form-control">
       <option value="all">--All--</option>
@@ -55,9 +55,21 @@
     </select>
   </div>
   <% } %>
+  <% if (locals.selectSchematicPlace) { %>
+  and
+  <div class="form-group col-md-2">
+    <label for="selectSchematicPlace">Schematic Place</label>
+    <select id="selectSchematicPlace" name="selectSchematicPlace" class="form-control">
+      <option value="all">--All--</option>
+      <% for (let i = 0; i < locals.selectSchematicPlace.length; i++) { %>
+      <option value="<%= locals.selectSchematicPlace[i] %>"><%= locals.selectSchematicPlace[i] %></option>
+      <% } %>
+    </select>
+  </div>
+  <% } %>
   <% if (locals.selectFusion) { %>
   or
-  <div class="form-group col-md-2">
+  <div class="form-group col-md-1">
     <label for="selectFusion">Fusion</label>
     <select id="selectFusion" name="selectFusion" class="form-control">
       <option value="all">--All--</option>

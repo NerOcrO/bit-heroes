@@ -6,20 +6,20 @@
       <th id="count" title="<%= locals.count %>"><%= locals.count %></th>
       <th id="type" class="asc focus">Type</th>
       <th id="name" class="asc">Name</th>
-      <th id="moveSpeed" class="asc">Move speed&nbsp;(%)</th>
+      <th id="moveSpeed" class="asc">Move&nbsp;speed&nbsp;(%)</th>
       <th id="bonus" class="asc">Bonus</th>
       <th id="skill" class="asc">Skill</th>
       <th id="purchase" class="asc">Purchase</th>
-      <th id="upgrade1" class="asc" title="Upgrade 1">Upd&nbsp;1</th>
-      <th id="upgrade2" class="asc" title="Upgrade 2">Upd&nbsp;2</th>
-      <th id="upgrade3" class="asc" title="Upgrade 3">Upd&nbsp;3</th>
-      <th id="upgrade4" class="asc" title="Upgrade 4">Upd&nbsp;4</th>
-      <th id="upgradeTotal" class="asc" title="Upgrade Total">Upd&nbsp;∑</th>
-      <th id="exchange1" class="asc" title="Exchange 1">Exchnge&nbsp;1</th>
-      <th id="exchange2" class="asc" title="Exchange 2">Exchnge&nbsp;2</th>
-      <th id="exchange3" class="asc" title="Exchange 3">Exchnge&nbsp;3</th>
-      <th id="exchange4" class="asc" title="Exchange 4">Exchnge&nbsp;4</th>
-      <th id="exchange5" class="asc" title="Exchange 5">Exchnge&nbsp;5</th>
+      <th id="upgrade1" class="asc" title="Upgrade 1">Update&nbsp;1</th>
+      <th id="upgrade2" class="asc" title="Upgrade 2">Update&nbsp;2</th>
+      <th id="upgrade3" class="asc" title="Upgrade 3">Update&nbsp;3</th>
+      <th id="upgrade4" class="asc" title="Upgrade 4">Update&nbsp;4</th>
+      <th id="upgradeTotal" class="asc" title="Upgrade Total">Update&nbsp;∑</th>
+      <th id="exchange1" class="asc" title="Exchange 1">Exchange&nbsp;1</th>
+      <th id="exchange2" class="asc" title="Exchange 2">Exchange&nbsp;2</th>
+      <th id="exchange3" class="asc" title="Exchange 3">Exchange&nbsp;3</th>
+      <th id="exchange4" class="asc" title="Exchange 4">Exchange&nbsp;4</th>
+      <th id="exchange5" class="asc" title="Exchange 5">Exchange&nbsp;5</th>
     </tr>
   </thead>
   <tbody>
@@ -33,9 +33,9 @@
       <td><%= locals.data[i].skill %></td>
       <td>
         <% for (let j = 0; j < locals.data[i].purchase.length; j++) { %>
-          <%= new Intl.NumberFormat().format(locals.data[i].purchase[j][0].count) %> <span class="material <%= locals.data[i].purchase[j][0].material.toLowerCase().replace(' ', '-') %>"><%= locals.data[i].purchase[j][0].material %></span><br>
-          <%= locals.data[i].purchase[j][1].count %> <span class="material mount-guts"><%= locals.data[i].purchase[j][1].material %></span><br>
-          <%= locals.data[i].purchase[j][2].count %> <span class="material <%= locals.data[i].purchase[j][2].material.toLowerCase().replace(' ', '-') %>"><%= locals.data[i].purchase[j][2].material %></span>
+          <%= new Intl.NumberFormat().format(locals.data[i].purchase[j][0].count) %> <span class="material <%= locals.data[i].purchase[j][0].material.toLowerCase().replace(' ', '-') %>" title="Gold"><%= locals.data[i].purchase[j][0].material %></span><br>
+          <%= locals.data[i].purchase[j][1].count %> <span class="material mount-guts" title="Mounts Guts"><%= locals.data[i].purchase[j][1].material %></span><br>
+          <%= locals.data[i].purchase[j][2].count %> <span class="material <%= locals.data[i].purchase[j][2].material.toLowerCase().replace(' ', '-') %>" title="<%= locals.data[i].purchase[j][2].material %>"><%= locals.data[i].purchase[j][2].material %></span>
         <% } %>
       </td>
       <%
@@ -50,20 +50,20 @@
           materialTotal += Number(locals.data[i].upgrades[j][1].count)
           material = locals.data[i].upgrades[j][1].material
           %>
-          <%= locals.data[i].upgrades[j][0].count %> <span class="material mount-guts"><%= locals.data[i].upgrades[j][0].material %></span><br>
-          <%= locals.data[i].upgrades[j][1].count %> <span class="material <%= locals.data[i].upgrades[j][1].material.toLowerCase().replace(' ', '-') %>"><%= locals.data[i].upgrades[j][1].material %></span>
+          <%= locals.data[i].upgrades[j][0].count %> <span class="material mount-guts" title="Mounts Guts"><%= locals.data[i].upgrades[j][0].material %></span><br>
+          <%= locals.data[i].upgrades[j][1].count %> <span class="material <%= locals.data[i].upgrades[j][1].material.toLowerCase().replace(' ', '-') %>" title="<%= locals.data[i].upgrades[j][1].material %>"><%= locals.data[i].upgrades[j][1].material %></span>
         <% } %>
       </td>
       <% } %>
       <td>
-        <%= gutsTotal %><span class="material mount-guts"><%= 'Mount guts' %></span><br>
-        <%= materialTotal %> <span class="material <%= material.toLowerCase().replace(' ', '-') %>"><%= material %></span>
+        <%= gutsTotal %><span class="material mount-guts" title="Mounts Guts"><%= 'Mount guts' %></span><br>
+        <%= materialTotal %> <span class="material <%= material.toLowerCase().replace(' ', '-') %>" title="<%= material %>"><%= material %></span>
       </td>
       <% for (let j = 0; j < 5; j++) { %>
       <td>
         <% if (locals.data[i].exchanges[j]) { %>
-          <%= locals.data[i].exchanges[j][0].count %> <span class="material mount-guts"><%= locals.data[i].exchanges[j][0].material %></span><br>
-          <%= locals.data[i].exchanges[j][1].count %> <span class="material <%= locals.data[i].exchanges[j][1].material.toLowerCase().replace(' ', '-') %>"><%= locals.data[i].exchanges[j][1].material %></span>
+          <%= locals.data[i].exchanges[j][0].count %> <span class="material mount-guts" title="Mounts Guts"><%= locals.data[i].exchanges[j][0].material %></span><br>
+          <%= locals.data[i].exchanges[j][1].count %> <span class="material <%= locals.data[i].exchanges[j][1].material.toLowerCase().replace(' ', '-') %>" title="<%= locals.data[i].exchanges[j][1].material %>"><%= locals.data[i].exchanges[j][1].material %></span>
         <% } %>
       </td>
       <% } %>
@@ -75,20 +75,20 @@
       <th id="count" title="<%= locals.count %>"><%= locals.count %></th>
       <th id="type" class="asc focus">Type</th>
       <th id="name" class="asc">Name</th>
-      <th id="moveSpeed" class="asc">Move speed&nbsp;(%)</th>
+      <th id="moveSpeed" class="asc">Move&nbsp;speed&nbsp;(%)</th>
       <th id="bonus" class="asc">Bonus</th>
       <th id="skill" class="asc">Skill</th>
       <th id="purchase" class="asc">Purchase</th>
-      <th id="upgrade1" class="asc" title="Upgrade 1">Upd 1</th>
-      <th id="upgrade2" class="asc" title="Upgrade 2">Upd 2</th>
-      <th id="upgrade3" class="asc" title="Upgrade 3">Upd 3</th>
-      <th id="upgrade4" class="asc" title="Upgrade 4">Upd 4</th>
-      <th id="upgradeTotal" class="asc" title="Upgrade Total">∑</th>
-      <th id="exchange1" class="asc" title="Exchange 1">Exc 1</th>
-      <th id="exchange2" class="asc" title="Exchange 2">Exc 2</th>
-      <th id="exchange3" class="asc" title="Exchange 3">Exc 3</th>
-      <th id="exchange4" class="asc" title="Exchange 4">Exc 4</th>
-      <th id="exchange5" class="asc" title="Exchange 5">Exc 5</th>
+      <th id="upgrade1" class="asc" title="Upgrade 1">Update&nbsp;1</th>
+      <th id="upgrade2" class="asc" title="Upgrade 2">Update&nbsp;2</th>
+      <th id="upgrade3" class="asc" title="Upgrade 3">Update&nbsp;3</th>
+      <th id="upgrade4" class="asc" title="Upgrade 4">Update&nbsp;4</th>
+      <th id="upgradeTotal" class="asc" title="Upgrade Total">Update&nbsp;∑</th>
+      <th id="exchange1" class="asc" title="Exchange 1">Exchange&nbsp;1</th>
+      <th id="exchange2" class="asc" title="Exchange 2">Exchange&nbsp;2</th>
+      <th id="exchange3" class="asc" title="Exchange 3">Exchange&nbsp;3</th>
+      <th id="exchange4" class="asc" title="Exchange 4">Exchange&nbsp;4</th>
+      <th id="exchange5" class="asc" title="Exchange 5">Exchange&nbsp;5</th>
     </tr>
   </tfoot>
 </table>

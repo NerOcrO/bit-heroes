@@ -5,9 +5,9 @@
       <th id="count" title="<%= locals.count %>"><%= locals.count %></th>
       <th id="type" class="asc focus">Type</th>
       <th id="name" class="asc">Name</th>
-      <th id="power" class="asc">Power&nbsp;(%)</th>
-      <th id="stamina" class="asc">Stamina&nbsp;(%)</th>
-      <th id="agility" class="asc">Agility&nbsp;(%)</th>
+      <th id="power" class="asc"><img src="/power.png" alt="" title="Power&nbsp;(%)"><span class="invisible">Power&nbsp;(%)</span></th>
+      <th id="stamina" class="asc"><img src="/stamina.png" alt="" title="Stamina&nbsp;(%)"><span class="invisible">Stamina&nbsp;(%)</spna></th>
+      <th id="agility" class="asc"><img src="/agility.png" alt="" title="Agility&nbsp;(%)"><span class="invisible">Agility&nbsp;(%)</spna></th>
       <th id="skill1" class="asc">Skill&nbsp;1</th>
       <th id="skill2" class="asc">Skill&nbsp;2</th>
       <th id="skill3" class="asc">Skill&nbsp;3</th>
@@ -15,14 +15,16 @@
       <th id="skill5" class="asc">Skill&nbsp;5</th>
       <th id="passiveAbility" class="asc">Passive ability</th>
       <th id="fusion" class="asc">Fusion</th>
+      <th id="schematic" class="asc">Schematic?</th>
     </tr>
   </thead>
   <tbody>
     <% for (let i = 0; i < locals.data.length; i++) { %>
     <tr id="<%= locals.data[i].name.replace(/ /g, '') %>"
     class="<%= locals.data[i].type.toLowerCase() %>"
-    data-raw-passive-abilities="<%= locals.data[i].rawPassiveAbilities %>"
     data-raw-skills="<%= locals.data[i].rawSkills %>"
+    data-raw-passive-abilities="<%= locals.data[i].rawPassiveAbilities %>"
+    data-raw-schematic-place="<%= locals.data[i].schematicPlace %>"
     data-raw-fusion="<%= locals.data[i].rawFusion %>">
       <td><img src="<%= locals.data[i].avatar %>" alt=""></td>
       <td><%= locals.data[i].type %></td>
@@ -62,19 +64,19 @@
             || locals.data[i].fusion[j].name.includes('Demon Hide')
             || locals.data[i].fusion[j].name.includes('Bacon')
             ) { %>
-          <li><%= new Intl.NumberFormat().format(locals.data[i].fusion[j].count) %> <%= locals.data[i].fusion[j].name %></li>
+          <li><%= new Intl.NumberFormat().format(locals.data[i].fusion[j].count) %> <span class="material <%= locals.data[i].fusion[j].name.toLowerCase().replace(' ', '-') %>" title="<%= locals.data[i].fusion[j].name %>"><%= locals.data[i].fusion[j].name %></span></li>
           <% }
           else
           { %>
           <li>
-            <%= locals.data[i].fusion[j].count %> <a class="<%= locals.data[i].fusion[j].class %>" href="/<%= locals.data[i].fusion[j].url %>#<%= locals.data[i].fusion[j].name.replace(/ /g, '') %>">
-              <%= locals.data[i].fusion[j].name %></a>
-            <%= locals.data[i].fusion[j].zone %>
+            <%= locals.data[i].fusion[j].count %>&nbsp;<a class="<%= locals.data[i].fusion[j].class %>" href="/<%= locals.data[i].fusion[j].url %>#<%= locals.data[i].fusion[j].name.replace(/ /g, '') %>">
+              <%= locals.data[i].fusion[j].name %></a>&nbsp;<%= locals.data[i].fusion[j].zone %>
           </li>
           <% } %>
         <% } %>
         </ul>
       </td>
+      <td><span><%= locals.data[i].schematicPlace %></span></td>
     </tr>
     <% } %>
   </tbody>
@@ -83,9 +85,9 @@
       <th id="count" title="<%= locals.count %>"><%= locals.count %></th>
       <th id="type" class="asc focus">Type</th>
       <th id="name" class="asc">Name</th>
-      <th id="power" class="asc">Power (%)</th>
-      <th id="stamina" class="asc">Stamina (%)</th>
-      <th id="agility" class="asc">Agility (%)</th>
+      <th id="power" class="asc"><img src="/power.png" alt="" title="Power&nbsp;(%)"><span class="invisible">Power&nbsp;(%)</span></th>
+      <th id="stamina" class="asc"><img src="/stamina.png" alt="" title="Stamina&nbsp;(%)"><span class="invisible">Stamina&nbsp;(%)</spna></th>
+      <th id="agility" class="asc"><img src="/agility.png" alt="" title="Agility&nbsp;(%)"><span class="invisible">Agility&nbsp;(%)</spna></th>
       <th id="skill1" class="asc">Skill&nbsp;1</th>
       <th id="skill2" class="asc">Skill&nbsp;2</th>
       <th id="skill3" class="asc">Skill&nbsp;3</th>
@@ -93,6 +95,7 @@
       <th id="skill5" class="asc">Skill&nbsp;5</th>
       <th id="passiveAbility" class="asc">Passive ability</th>
       <th id="fusion" class="asc">Fusion</th>
+      <th id="schematic" class="asc">Schematic?</th>
     </tr>
   </tfoot>
 </table>

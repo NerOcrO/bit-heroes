@@ -10,7 +10,7 @@ const setSimpleSelect = (data, index) => data.reduce((accumulator, familiar) => 
   if (index === 'type') {
     text = familiar[index].replace(/[0-9.]*% /g, '')
   }
-  else if (index === 'zone') {
+  else if (index === 'zone' || index === 'schematicPlace') {
     text = familiar[index]
   }
 
@@ -75,14 +75,12 @@ const displayFamiliars = async (request, response, page) => {
       if (page === 'fusions') {
         response.locals.selectPassiveAbility = setComplexSelect(data, 'passiveAbility').sort()
         response.locals.selectFusion = setComplexSelect(data, 'fusion').sort()
+        response.locals.selectSchematicPlace = setSimpleSelect(data, 'schematicPlace').sort()
+        // It's crappy but...
+        var dataFamiliars = JSON.parse(fs.readFileSync('data/familiars.json', 'utf8'))
       }
       else {
         response.locals.selectZone = setSimpleSelect(data, 'zone').sort()
-      }
-
-      if (page === 'fusions') {
-        // It's crappy but...
-        var dataFamiliars = JSON.parse(fs.readFileSync('data/familiars.json', 'utf8'))
       }
 
       data = data.map((familiar) => {
@@ -97,7 +95,7 @@ const displayFamiliars = async (request, response, page) => {
             requisite.url = 'fusions'
 
             if (familiar) {
-              requisite.zone = ` (${familiar.zone})`
+              requisite.zone = `(${familiar.zone})`
               requisite.class = familiar.type.toLowerCase()
               requisite.url = 'familiars'
             }
