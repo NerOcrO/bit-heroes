@@ -18,7 +18,7 @@ const setPassiveAbility = (rowAbilities) => {
 const setSchematicPlace = (tr) => {
   let schematicPlace = tr.parents('table').prev('h3').find('.mw-headline').text()
 
-  if (schematicPlace.match(/[Common||Rare||Epic||Legendary||Mythic] fusions/)) {
+  if (/[Common||Rare||Epic||Legendary||Mythic] fusions/.test(schematicPlace)) {
     schematicPlace = 'Regular'
   }
 
