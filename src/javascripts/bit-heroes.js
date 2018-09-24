@@ -3,8 +3,8 @@
 const $ = selector => document.querySelector(selector)
 const $$ = selector => document.querySelectorAll(selector)
 
-const setStrongestAndWeakest = () => {
-  if ($('.mounts')) {
+const setStrongestAndWeakestFamiliar = () => {
+  if ($('.mounts') || $('.mainhands')) {
     return
   }
 
@@ -41,24 +41,25 @@ function cleanTableHead(th) {
 }
 
 const sortTableRow = (event) => {
-  const { id } = event.currentTarget
+  const element = event.currentTarget
+  const { id } = element
   let rows = []
 
-  if (id === 'power' || id === 'stamina' || id === 'agility') {
+  if (element.classList.contains('number')) {
     rows = Array.from($$('tbody tr'))
-      .sort((a, b) => b.children[event.currentTarget.cellIndex].textContent - a.children[event.currentTarget.cellIndex].textContent)
+      .sort((a, b) => b.children[element.cellIndex].textContent - a.children[element.cellIndex].textContent)
   }
   else {
     rows = Array.from($$('tbody tr'))
       .sort((a, b) => {
-        const a1 = a.children[event.currentTarget.cellIndex].textContent.normalize('NFD').replace(/[\u0300-\u036f| |']/g, '')
-        const b1 = b.children[event.currentTarget.cellIndex].textContent.normalize('NFD').replace(/[\u0300-\u036f| |']/g, '')
+        const a1 = a.children[element.cellIndex].textContent.normalize('NFD').replace(/[\u0300-\u036f| |']/g, '')
+        const b1 = b.children[element.cellIndex].textContent.normalize('NFD').replace(/[\u0300-\u036f| |']/g, '')
         if (a1 < b1) return -1
         if (a1 > b1) return 1
         return 0
       })
   }
-  if (event.currentTarget.classList.contains('desc')) {
+  if (element.classList.contains('desc')) {
     rows.reverse()
   }
 
@@ -83,6 +84,8 @@ const selectRows = () => {
     let flagPassiveAbility = true
     let flagSchematicPlace = true
     let flagFusion = true
+    let flagTier = true
+    let flagWeaponType = true
 
     if (
       selectValues.selectType
@@ -116,6 +119,22 @@ const selectRows = () => {
     }
 
     if (
+      selectValues.selectTier
+      && selectValues.selectTier.content !== 'all'
+      && tr.dataset.rawTier !== selectValues.selectTier.content
+    ) {
+      flagTier = false
+    }
+
+    if (
+      selectValues.selectWeaponType
+      && selectValues.selectWeaponType.content !== 'all'
+      && tr.dataset.rawWeaponType !== selectValues.selectWeaponType.content
+    ) {
+      flagWeaponType = false
+    }
+
+    if (
       selectValues.selectPassiveAbility
       && selectValues.selectPassiveAbility.content !== 'all'
       && !tr.dataset.rawPassiveAbilities.split(',').some(passiveAbility => passiveAbility === selectValues.selectPassiveAbility.content)
@@ -140,6 +159,8 @@ const selectRows = () => {
       flagZone = true
       flagPassiveAbility = true
       flagSchematicPlace = true
+      flagTier = true
+      flagWeaponType = true
 
       if (!tr.dataset.rawFusion.split(',').some(requisite => requisite === selectValues.selectFusion.content)) {
         flagFusion = false
@@ -153,6 +174,8 @@ const selectRows = () => {
       && flagPassiveAbility
       && flagSchematicPlace
       && flagFusion
+      && flagTier
+      && flagWeaponType
     ) {
       tr.classList.remove('invisible')
     }
@@ -165,10 +188,12 @@ const selectRows = () => {
     span.classList.remove('highlight')
 
     if (
-      span.textContent === selectValues.selectSkill.content
+      selectValues.selectSkill && span.textContent === selectValues.selectSkill.content
       || selectValues.selectPassiveAbility && span.textContent === selectValues.selectPassiveAbility.content
       || selectValues.selectZone && span.textContent === selectValues.selectZone.content
       || selectValues.selectSchematicPlace && span.textContent === selectValues.selectSchematicPlace.content
+      || selectValues.selectTier && span.textContent === selectValues.selectTier.content
+      || selectValues.selectWeaponType && span.textContent === selectValues.selectWeaponType.content
     ) {
       span.classList.add('highlight')
     }
@@ -178,7 +203,7 @@ const selectRows = () => {
     element.innerHTML = $$('tbody tr').length - $$('tr.invisible').length
   })
 
-  setStrongestAndWeakest()
+  setStrongestAndWeakestFamiliar()
 }
 
 const reset = () => {
@@ -223,4 +248,4 @@ const labels = Array.from($$('thead th')).map(th => th.innerText)
 $$('.table td').forEach((td, index) => {
   td.setAttribute('data-label', labels[index % labels.length])
 })
-setStrongestAndWeakest()
+setStrongestAndWeakestFamiliar()

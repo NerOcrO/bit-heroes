@@ -31,18 +31,6 @@
     </select>
   </div>
   <% } %>
-  <% if (locals.selectZone) { %>
-  and
-  <div class="form-group col-md-2">
-    <label for="selectZone">Zone</label>
-    <select id="selectZone" name="selectZone" class="form-control">
-      <option value="all">--All--</option>
-      <% for (let i = 0; i < locals.selectZone.length; i++) { %>
-      <option value="<%= locals.selectZone[i] %>"><%= locals.selectZone[i] %></option>
-      <% } %>
-    </select>
-  </div>
-  <% } %>
   <% if (locals.selectPassiveAbility) { %>
   and
   <div class="form-group col-md-2">
@@ -63,6 +51,42 @@
       <option value="all">--All--</option>
       <% for (let i = 0; i < locals.selectSchematicPlace.length; i++) { %>
       <option value="<%= locals.selectSchematicPlace[i] %>"><%= locals.selectSchematicPlace[i] %></option>
+      <% } %>
+    </select>
+  </div>
+  <% } %>
+  <% if (locals.selectWeaponType) { %>
+  and
+  <div class="form-group col-md-2">
+    <label for="selectWeaponType">Weapon Type</label>
+    <select id="selectWeaponType" name="selectWeaponType" class="form-control">
+      <option value="all">--All--</option>
+      <% for (let i = 0; i < locals.selectWeaponType.length; i++) { %>
+      <option value="<%= locals.selectWeaponType[i] %>"><%= locals.selectWeaponType[i] %></option>
+      <% } %>
+    </select>
+  </div>
+  <% } %>
+  <% if (locals.selectTier) { %>
+  and
+  <div class="form-group col-md-2">
+    <label for="selectTier">Tier</label>
+    <select id="selectTier" name="selectTier" class="form-control">
+      <option value="all">--All--</option>
+      <% for (let i = 0; i < locals.selectTier.length; i++) { %>
+      <option value="<%= locals.selectTier[i] %>"><%= locals.selectTier[i] %></option>
+      <% } %>
+    </select>
+  </div>
+  <% } %>
+  <% if (locals.selectZone) { %>
+  and
+  <div class="form-group col-md-2">
+    <label for="selectZone">Zone</label>
+    <select id="selectZone" name="selectZone" class="form-control">
+      <option value="all">--All--</option>
+      <% for (let i = 0; i < locals.selectZone.length; i++) { %>
+      <option value="<%= locals.selectZone[i] %>"><%= locals.selectZone[i] %></option>
       <% } %>
     </select>
   </div>

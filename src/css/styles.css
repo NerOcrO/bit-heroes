@@ -105,7 +105,16 @@ td:nth-child(4),
 .fusions td:nth-child(6),
 .familiars td:nth-child(5),
 .familiars td:nth-child(6),
-.familiars td:nth-child(11) {
+.familiars td:nth-child(11),
+.mainhands td:nth-child(5),
+.mainhands td:nth-child(6),
+.mainhands td:nth-child(7),
+.mainhands td:nth-child(8),
+.mainhands td:nth-child(9),
+.mainhands td:nth-child(10),
+.mainhands td:nth-child(11),
+.mainhands td:nth-child(12),
+.mainhands td:nth-child(14) {
   text-align: center;
 }
 .mounts td:nth-child(7),
@@ -161,6 +170,9 @@ a.mythic {
 }
 .mythic td:nth-child(1) {
   background-color: #8e546a;
+}
+.ancient td:nth-child(1) {
+  background-color: #b65d3e;
 }
 .invisible {
   display: none;

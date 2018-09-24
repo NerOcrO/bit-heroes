@@ -10,7 +10,7 @@ const setSimpleSelect = (data, index) => data.reduce((accumulator, familiar) => 
   if (index === 'type') {
     text = familiar[index].replace(/[0-9.]*% /g, '')
   }
-  else if (index === 'zone' || index === 'schematicPlace') {
+  else {
     text = familiar[index]
   }
 
@@ -119,12 +119,26 @@ const displayFamiliars = async (request, response, page) => {
     .catch(error => console.log(error))
 }
 
-const displaySoon = (request, response, page) => {
-  response.render('layout', {
-    view: page,
-    title: page,
-    csrfToken: request.csrfToken(),
-  })
+const displayEquipments = async (request, response, page) => {
+  await fs.promises.readFile(`data/${page}.json`, 'utf8')
+    .then((rawData) => {
+      const data = JSON.parse(rawData)
+
+      response.locals.selectType = setSimpleSelect(data, 'type')
+      response.locals.selectWeaponType = setSimpleSelect(data, 'weaponType')
+      response.locals.selectTier = setSimpleSelect(data, 'tier')
+      response.locals.selectZone = setSimpleSelect(data, 'zone')
+
+      response.render('layout', {
+        view: page,
+        title: page,
+        data,
+        csrfToken: request.csrfToken(),
+        count: data.length,
+        wikiUrl: `${wikiUrl + page}`,
+      })
+    })
+    .catch(error => console.log(error))
 }
 
 const displayMounts = async (request, response, page) => {
@@ -158,8 +172,8 @@ router.get('/fusions', (request, response) => {
   displayFamiliars(request, response, 'fusions')
 })
 
-router.get('/equipments', (request, response) => {
-  displaySoon(request, response, 'equipments')
+router.get('/equipments/:equipment(mainhands|offhands|heads|bodies|necklaces|rings)', (request, response) => {
+  displayEquipments(request, response, request.params.equipment)
 })
 
 router.get('/mounts', (request, response) => {

@@ -6,7 +6,7 @@
 
 ## Make data
 
-* npm run scrapping familiars fusions mounts && npm run scrapping schematics
+* npm run scrapping familiars fusions mounts mainhands && npm run scrapping schematics
   * change McGobble-steinMcGobblestein by McGobblestein
 
 ## Use data
