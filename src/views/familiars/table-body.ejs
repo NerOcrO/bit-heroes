@@ -1,0 +1,21 @@
+<% for (let i = 0; i < locals.data.length; i++) { %>
+<tr id="<%= locals.data[i].name.replace(/ /g, '') %>"
+  class="<%= locals.data[i].type.toLowerCase() %>"
+  data-raw-skills="<%= locals.data[i].rawSkills %>"
+  data-raw-zone="<%= locals.data[i].zone %>">
+  <td><img src="<%= locals.data[i].avatar %>" alt=""></td>
+  <td><%= locals.data[i].type %></td>
+  <td><%= locals.data[i].name %></td>
+  <td><%= locals.data[i].power %></td>
+  <td><%= locals.data[i].stamina %></td>
+  <td><%= locals.data[i].agility %></td>
+  <% for (let j = 0; j < 4; j++) { %>
+  <td>
+  <% if (locals.data[i].skills[j]) { %>
+    <%= locals.data[i].skills[j].name %> (<%= locals.data[i].skills[j].skillPoint %>&nbsp;SP)<br><span><%= locals.data[i].skills[j].action %></span><br><%= locals.data[i].skills[j].pourcentage %>
+  <% } %>
+  </td>
+  <% } %>
+  <td><span><%= locals.data[i].zone %></span></td>
+</tr>
+<% } %>

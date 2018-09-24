@@ -1,0 +1,17 @@
+<%- include('filters') %>
+<%- include(locals.view + '/intro') %>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <%- include(locals.view + '/table-header') %>
+    </tr>
+  </thead>
+  <tbody>
+    <%- include(locals.view + '/table-body') %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <%- include(locals.view + '/table-header') %>
+    </tr>
+  </tfoot>
+</table>

@@ -1,0 +1,59 @@
+<% for (let i = 0; i < locals.data.length; i++) { %>
+<tr id="<%= locals.data[i].name.replace(/ /g, '') %>"
+class="<%= locals.data[i].type.toLowerCase() %>"
+data-raw-skills="<%= locals.data[i].rawSkills %>"
+data-raw-passive-abilities="<%= locals.data[i].rawPassiveAbilities %>"
+data-raw-schematic-place="<%= locals.data[i].schematicPlace %>"
+data-raw-fusion="<%= locals.data[i].rawFusion %>">
+  <td><img src="<%= locals.data[i].avatar %>" alt=""></td>
+  <td><%= locals.data[i].type %></td>
+  <td><%= locals.data[i].name %></td>
+  <td><%= locals.data[i].power %></td>
+  <td><%= locals.data[i].stamina %></td>
+  <td><%= locals.data[i].agility %></td>
+  <% for (let j = 0; j < 5; j++) { %>
+  <td>
+  <% if (locals.data[i].skills[j]) { %>
+    <%= locals.data[i].skills[j].name %> (<%= locals.data[i].skills[j].skillPoint %>&nbsp;SP)<br><span><%= locals.data[i].skills[j].action %></span><br><%= locals.data[i].skills[j].pourcentage %>
+  <% } %>
+  </td>
+  <% } %>
+  <td>
+    <ul>
+    <% for (let j = 0; j < locals.data[i].passiveAbility.length; j++) { %>
+      <li><%= locals.data[i].passiveAbility[j].pourcentage %> <span><%= locals.data[i].passiveAbility[j].ability %></span></li>
+    <% } %>
+    </ul>
+  </td>
+  <td>
+    <ul>
+    <% for (let j = 0; j < locals.data[i].fusion.length; j++) { %>
+      <% if (
+        locals.data[i].fusion[j].name.includes('Gold')
+        || locals.data[i].fusion[j].name.includes('Material')
+        || locals.data[i].fusion[j].name.includes('Sprocket')
+        || locals.data[i].fusion[j].name.includes('Syrum')
+        || locals.data[i].fusion[j].name.includes('Hobbit Foot')
+        || locals.data[i].fusion[j].name.includes('Demon Juice')
+        || locals.data[i].fusion[j].name.includes('Wet Brainz')
+        || locals.data[i].fusion[j].name.includes('Ninja Powah')
+        || locals.data[i].fusion[j].name.includes('Ginger Snaps')
+        || locals.data[i].fusion[j].name.includes('Jelly Donut')
+        || locals.data[i].fusion[j].name.includes('Ectoplasm')
+        || locals.data[i].fusion[j].name.includes('Demon Hide')
+        || locals.data[i].fusion[j].name.includes('Bacon')
+        ) { %>
+      <li><%= new Intl.NumberFormat().format(locals.data[i].fusion[j].count) %> <span class="material <%= locals.data[i].fusion[j].name.toLowerCase().replace(' ', '-') %>" title="<%= locals.data[i].fusion[j].name %>"><%= locals.data[i].fusion[j].name %></span></li>
+      <% }
+      else
+      { %>
+      <li>
+        <%= locals.data[i].fusion[j].count %>&nbsp;<a class="<%= locals.data[i].fusion[j].class %>" href="/<%= locals.data[i].fusion[j].url %>#<%= locals.data[i].fusion[j].name.replace(/ /g, '') %>"><%= locals.data[i].fusion[j].name %></a>&nbsp;<%= locals.data[i].fusion[j].zone %>
+      </li>
+      <% } %>
+    <% } %>
+    </ul>
+  </td>
+  <td><span><%= locals.data[i].schematicPlace %></span></td>
+</tr>
+<% } %>
