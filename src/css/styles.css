@@ -83,10 +83,14 @@ label {
 }
 th {
   background-color: #324254;
-  cursor: pointer;
   text-align: center;
 }
-th:hover {
+th.asc,
+th.desc {
+  cursor: pointer;
+}
+th.asc:hover,
+th.desc:hover {
   background-color: #3d5168;
 }
 tr {

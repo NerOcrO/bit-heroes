@@ -241,7 +241,7 @@ $('.submit').classList.add('invisible')
 $('.reset').addEventListener('click', reset)
 $$('select').forEach(option => option.addEventListener('change', selectRows))
 $$('.mounts select').forEach(option => option.addEventListener('change', showRerollFormula))
-$$('th').forEach(th => th.addEventListener('click', sortTableRow))
+$$('th.asc, th.desc').forEach(th => th.addEventListener('click', sortTableRow))
 
 // For responsive.
 const labels = Array.from($$('thead th')).map(th => th.innerText)
