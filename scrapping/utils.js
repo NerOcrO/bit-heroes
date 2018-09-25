@@ -2,7 +2,7 @@ import cheerio from 'cheerio'
 import fs from 'fs'
 import fetch from 'node-fetch'
 
-export const equipmentUpdates = {
+export const equipmentUpgrades = {
   Common: {
     1: [11],
     2: [13],
@@ -190,7 +190,7 @@ export const setEquipment = async (firstRow, secondRow, equipmentType = null) =>
   const power = getText(firstRow, equipmentType === 'mainhands' ? 4 : 3)
   const stamina = getText(firstRow, equipmentType === 'mainhands' ? 5 : 4)
   const agility = getText(firstRow, equipmentType === 'mainhands' ? 6 : 5)
-  const update = /\(.*\)/
+  const upgrade = /\(.*\)/
   const tier = setEquipmentTier(zone)
   const weaponType = () => {
     if (equipmentType === 'mainhands') {
@@ -206,8 +206,8 @@ export const setEquipment = async (firstRow, secondRow, equipmentType = null) =>
     power,
     stamina,
     agility,
-    baseStats: Number(power.replace(update, '')) + Number(stamina.replace(update, '')) + Number(agility.replace(update, '')),
-    update: equipmentUpdates[type][tier],
+    baseStats: Number(power.replace(upgrade, '')) + Number(stamina.replace(upgrade, '')) + Number(agility.replace(upgrade, '')),
+    upgrade: equipmentUpgrades[type][tier],
     tier,
     weaponType,
   }
