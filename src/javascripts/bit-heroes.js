@@ -4,11 +4,7 @@ const $ = selector => document.querySelector(selector)
 const $$ = selector => document.querySelectorAll(selector)
 
 const setStrongestAndWeakestFamiliar = () => {
-  if ($('.mounts') || $('.mainhands') || $('.offhands')) {
-    return
-  }
-
-  const tr = Array.from($$('tbody tr:not(.invisible)'))
+  const tr = Array.from($$('.familiars tbody tr:not(.invisible), .fusions tbody tr:not(.invisible)'))
 
   if (tr.length === 0) {
     return

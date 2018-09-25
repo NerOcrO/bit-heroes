@@ -1,0 +1,21 @@
+<% for (let i = 0; i < locals.data.length; i++) { %>
+<tr id="<%= locals.data[i].name.replace(/ /g, '') %>"
+  class="<%= locals.data[i].type.toLowerCase() %>"
+  data-raw-tier="<%= locals.data[i].tier %>"
+  data-raw-weapon-type="<%= locals.data[i].weaponType %>"
+  data-raw-zone="<%= locals.data[i].zone %>">
+  <td><img src="<%= locals.data[i].avatar %>" alt=""></td>
+  <td><%= locals.data[i].type %></td>
+  <td><%= locals.data[i].name %></td>
+  <td class="center"><%= locals.data[i].power %></td>
+  <td class="center"><%= locals.data[i].stamina %></td>
+  <td class="center"><%= locals.data[i].agility %></td>
+  <td class="center"><%= locals.data[i].baseStats %></td>
+  <% for (let j = 0; j < 4; j++) { %>
+  <td class="center"><%= locals.data[i].update[j] %></td>
+  <% } %>
+  <td class="center"><%= locals.data[i].update[locals.data[i].update.length - 1] %></td>
+  <td class="center"><span><%= locals.data[i].tier %></span></td>
+  <td><span><%= locals.data[i].zone %></span></td>
+</tr>
+<% } %>
