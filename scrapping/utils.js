@@ -192,13 +192,7 @@ export const setEquipment = async (firstRow, secondRow, equipmentType = null) =>
   const agility = getText(firstRow, equipmentType === 'mainhands' ? 6 : 5)
   const upgrade = /\(.*\)/
   const tier = setEquipmentTier(zone)
-  const weaponType = () => {
-    if (equipmentType === 'mainhands') {
-      return getText(firstRow, 3)
-    }
-  }
-
-  return {
+  const data = {
     type,
     avatar,
     name: getText(firstRow, 2).replace('*', ''),
@@ -209,8 +203,13 @@ export const setEquipment = async (firstRow, secondRow, equipmentType = null) =>
     baseStats: Number(power.replace(upgrade, '')) + Number(stamina.replace(upgrade, '')) + Number(agility.replace(upgrade, '')),
     upgrade: equipmentUpgrades[type][tier],
     tier,
-    weaponType,
   }
+
+  if (equipmentType === 'mainhands') {
+    data.weaponType = getText(firstRow, 3)
+  }
+
+  return data
 }
 
 /**

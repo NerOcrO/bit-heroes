@@ -132,13 +132,13 @@ const displayEquipments = async (request, response, page) => {
       response.locals.selectZone = setSimpleSelect(data, 'zone')
 
       response.render('layout', {
-        view: page,
+        view: 'equipments',
         title: page,
         data,
         csrfToken: request.csrfToken(),
         count: data.length,
         wikiUrl: `${wikiUrl + page}`,
-        equipment: true,
+        equipment: page,
       })
     })
     .catch(error => console.log(error))

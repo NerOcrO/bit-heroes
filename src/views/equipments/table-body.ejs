@@ -15,6 +15,9 @@
   <td class="center"><%= locals.data[i].upgrade[j] %></td>
   <% } %>
   <td class="center"><%= locals.data[i].upgrade[locals.data[i].upgrade.length - 1] %></td>
+  <% if (locals.title === 'mainhands') { %>
+  <td><span><%= locals.data[i].weaponType %></span></td>
+  <% } %>
   <td class="center"><span><%= locals.data[i].tier %></span></td>
   <td><span><%= locals.data[i].zone %></span></td>
 </tr>
