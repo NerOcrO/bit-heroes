@@ -15,36 +15,44 @@ ul {
 main {
   margin-top: 60px;
 }
-header {
+header,
+.equipments {
   background-color: #324254;
 }
-header ul {
+header ul,
+.equipments {
   align-items: center;
   border-bottom: 1px solid #dee2e6;
+  color: #fff;
+  font-weight: bold;
+  line-height: 50px;
   list-style: none;
   margin: 0;
   padding: 0;
-}
-header li > a {
-  color: #fff;
-  display: block;
-  font-weight: bold;
   text-align: center;
   text-shadow: -2px 0 #000, 0 2px #000, 2px 0 #000, 0 -2px #000;
 }
-header li > a:hover {
+header li > a,
+.equipments a {
+  border-right: 1px solid #dee2e6;
+  display: block;
+}
+header li > a:hover,
+.equipments a:hover {
   background-color: #3d5168;
   color: #fff;
   text-decoration: none;
 }
-header ul .active {
+header .active,
+.equipments .active {
   background-color: #f18829;
-  color: #fff;
 }
-header li.col-md-2 {
-  border-right: 1px solid #dee2e6;
-  line-height: 50px;
+header .col-md-2,
+.equipments .col-md-1 {
   padding: 0;
+}
+.equipments {
+  margin-bottom: 1rem;
 }
 .github {
   position: absolute;
@@ -105,33 +113,10 @@ td:nth-child(2) {
 }
 td:nth-child(1),
 td:nth-child(4),
-.fusions td:nth-child(5),
-.fusions td:nth-child(6),
-.familiars td:nth-child(5),
-.familiars td:nth-child(6),
-.familiars td:nth-child(11),
-.mainhands td:nth-child(5),
-.mainhands td:nth-child(6),
-.mainhands td:nth-child(7),
-.mainhands td:nth-child(8),
-.mainhands td:nth-child(9),
-.mainhands td:nth-child(10),
-.mainhands td:nth-child(11),
-.mainhands td:nth-child(12),
-.mainhands td:nth-child(14) {
+.center {
   text-align: center;
 }
-.mounts td:nth-child(7),
-.mounts td:nth-child(8),
-.mounts td:nth-child(9),
-.mounts td:nth-child(10),
-.mounts td:nth-child(11),
-.mounts td:nth-child(12),
-.mounts td:nth-child(13),
-.mounts td:nth-child(14),
-.mounts td:nth-child(15),
-.mounts td:nth-child(16),
-.mounts td:nth-child(17) {
+td.right {
   padding-right: 2rem;
   text-align: right;
 }

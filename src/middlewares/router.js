@@ -125,7 +125,9 @@ const displayEquipments = async (request, response, page) => {
       const data = JSON.parse(rawData)
 
       response.locals.selectType = setSimpleSelect(data, 'type')
-      response.locals.selectWeaponType = setSimpleSelect(data, 'weaponType')
+      if (page === 'mainhands') {
+        response.locals.selectWeaponType = setSimpleSelect(data, 'weaponType')
+      }
       response.locals.selectTier = setSimpleSelect(data, 'tier')
       response.locals.selectZone = setSimpleSelect(data, 'zone')
 
@@ -136,6 +138,7 @@ const displayEquipments = async (request, response, page) => {
         csrfToken: request.csrfToken(),
         count: data.length,
         wikiUrl: `${wikiUrl + page}`,
+        equipment: true,
       })
     })
     .catch(error => console.log(error))

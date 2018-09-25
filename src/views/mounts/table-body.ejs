@@ -6,7 +6,7 @@
   <td><%= locals.data[i].moveSpeed %></td>
   <td><%= locals.data[i].bonus %></td>
   <td><%= locals.data[i].skill %></td>
-  <td>
+  <td class="right">
   <% for (let j = 0; j < locals.data[i].purchase.length; j++) { %>
     <%= new Intl.NumberFormat().format(locals.data[i].purchase[j][0].count) %> <span class="material <%= locals.data[i].purchase[j][0].material.toLowerCase().replace(' ', '-') %>" title="Gold"><%= locals.data[i].purchase[j][0].material %></span><br>
     <%= locals.data[i].purchase[j][1].count %> <span class="material mount-guts" title="Mounts Guts"><%= locals.data[i].purchase[j][1].material %></span><br>
@@ -18,7 +18,7 @@
   let materialTotal = 0
   let material = ''
   for (let j = 0; j < 4; j++) { %>
-  <td>
+  <td class="right">
   <% if (locals.data[i].upgrades[j]) { %>
     <%
     gutsTotal += Number(locals.data[i].upgrades[j][0].count)
@@ -30,12 +30,12 @@
   <% } %>
   </td>
   <% } %>
-  <td>
+  <td class="right">
     <%= gutsTotal %><span class="material mount-guts" title="Mounts Guts"><%= 'Mount guts' %></span><br>
     <%= materialTotal %> <span class="material <%= material.toLowerCase().replace(' ', '-') %>" title="<%= material %>"><%= material %></span>
   </td>
   <% for (let j = 0; j < 5; j++) { %>
-  <td>
+  <td class="right">
   <% if (locals.data[i].exchanges[j]) { %>
     <%= locals.data[i].exchanges[j][0].count %> <span class="material mount-guts" title="Mounts Guts"><%= locals.data[i].exchanges[j][0].material %></span><br>
     <%= locals.data[i].exchanges[j][1].count %> <span class="material <%= locals.data[i].exchanges[j][1].material.toLowerCase().replace(' ', '-') %>" title="<%= locals.data[i].exchanges[j][1].material %>"><%= locals.data[i].exchanges[j][1].material %></span>

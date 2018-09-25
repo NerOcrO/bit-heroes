@@ -4,7 +4,7 @@ const $ = selector => document.querySelector(selector)
 const $$ = selector => document.querySelectorAll(selector)
 
 const setStrongestAndWeakestFamiliar = () => {
-  if ($('.mounts') || $('.mainhands')) {
+  if ($('.mounts') || $('.mainhands') || $('.offhands')) {
     return
   }
 
