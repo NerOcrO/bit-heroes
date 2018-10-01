@@ -63,12 +63,17 @@ export const equipmentUpgrades = {
  *   Base64 of image.
  */
 export const getAvatarBase64 = async (url) => {
-  const blob = await fetch(url)
-    .then(response => response.blob())
-    .catch(error => console.log(error))
-  const symbols = Object.getOwnPropertySymbols(blob)
+  const response = await fetch(url)
 
-  return `data:image/png;base64,${blob[symbols[1]].toString('base64')}`
+  try {
+    const blob = await response.blob()
+    const symbols = Object.getOwnPropertySymbols(blob)
+
+    return `data:image/png;base64,${blob[symbols[1]].toString('base64')}`
+  }
+  catch (error) {
+    console.error(error)
+  }
 }
 
 /**

@@ -8,5 +8,5 @@ for (let index = 2; index < process.argv.length; index++) {
   fetch(urlWiki)
     .then(response => response.text())
     .then(scrapping)
-    .catch(error => console.log(error))
+    .catch(error => console.error(error))
 }

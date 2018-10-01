@@ -65,102 +65,112 @@ const setComplexSelect = (data, index) => data.reduce((accumulator, familiar) =>
 }, [])
 
 const displayFamiliars = async (request, response, page) => {
-  await fs.promises.readFile(`data/${page}.json`, 'utf8')
-    .then(async (rawData) => {
-      let data = JSON.parse(rawData)
+  const rawData = await fs.promises.readFile(`data/${page}.json`, 'utf8')
 
-      response.locals.selectType = setSimpleSelect(data, 'type')
-      response.locals.selectSkill = setComplexSelect(data, 'skills').sort()
+  try {
+    let data = JSON.parse(rawData)
+
+    response.locals.selectType = setSimpleSelect(data, 'type')
+    response.locals.selectSkill = setComplexSelect(data, 'skills').sort()
+
+    if (page === 'fusions') {
+      response.locals.selectPassiveAbility = setComplexSelect(data, 'passiveAbility').sort()
+      response.locals.selectFusion = setComplexSelect(data, 'fusion').sort()
+      response.locals.selectSchematicPlace = setSimpleSelect(data, 'schematicPlace').sort()
+      // It's crappy but...
+      var dataFamiliars = JSON.parse(fs.readFileSync('data/familiars.json', 'utf8'))
+    }
+    else {
+      response.locals.selectZone = setSimpleSelect(data, 'zone').sort()
+    }
+
+    data = data.map((familiar) => {
+      familiar.rawSkills = familiar.skills.map(skill => `${skill.skillPoint}|${skill.action}`)
 
       if (page === 'fusions') {
-        response.locals.selectPassiveAbility = setComplexSelect(data, 'passiveAbility').sort()
-        response.locals.selectFusion = setComplexSelect(data, 'fusion').sort()
-        response.locals.selectSchematicPlace = setSimpleSelect(data, 'schematicPlace').sort()
-        // It's crappy but...
-        var dataFamiliars = JSON.parse(fs.readFileSync('data/familiars.json', 'utf8'))
+        familiar.rawPassiveAbilities = familiar.passiveAbility.map(passiveAbility => passiveAbility.ability)
+        familiar.rawFusion = familiar.fusion.map(requisite => requisite.name)
+
+        familiar.fusion.map((requisite) => {
+          const familiar = dataFamiliars.find(element => element.name === requisite.name)
+          requisite.url = 'fusions'
+
+          if (familiar) {
+            requisite.zone = `(${familiar.zone})`
+            requisite.class = familiar.type.toLowerCase()
+            requisite.url = 'familiars'
+          }
+
+          return requisite
+        })
       }
-      else {
-        response.locals.selectZone = setSimpleSelect(data, 'zone').sort()
-      }
 
-      data = data.map((familiar) => {
-        familiar.rawSkills = familiar.skills.map(skill => `${skill.skillPoint}|${skill.action}`)
-
-        if (page === 'fusions') {
-          familiar.rawPassiveAbilities = familiar.passiveAbility.map(passiveAbility => passiveAbility.ability)
-          familiar.rawFusion = familiar.fusion.map(requisite => requisite.name)
-
-          familiar.fusion.map((requisite) => {
-            const familiar = dataFamiliars.find(element => element.name === requisite.name)
-            requisite.url = 'fusions'
-
-            if (familiar) {
-              requisite.zone = `(${familiar.zone})`
-              requisite.class = familiar.type.toLowerCase()
-              requisite.url = 'familiars'
-            }
-
-            return requisite
-          })
-        }
-
-        return familiar
-      })
-
-      response.render('layout', {
-        view: page,
-        title: page,
-        data,
-        csrfToken: request.csrfToken(),
-        count: data.length,
-        wikiUrl: `${wikiUrl + page}`,
-      })
+      return familiar
     })
-    .catch(error => console.log(error))
+
+    response.render('layout', {
+      view: page,
+      title: page,
+      data,
+      csrfToken: request.csrfToken(),
+      count: data.length,
+      wikiUrl: `${wikiUrl + page}`,
+    })
+  }
+  catch (error) {
+    console.error(error)
+  }
 }
 
-const displayEquipments = async (request, response, page) => {
-  await fs.promises.readFile(`data/${page}.json`, 'utf8')
-    .then((rawData) => {
-      const data = JSON.parse(rawData)
+const displayEquipments = async (request, response) => {
+  const page = request.params.equipment
+  const rawData = await fs.promises.readFile(`data/${page}.json`, 'utf8')
 
-      response.locals.selectType = setSimpleSelect(data, 'type')
-      if (page === 'mainhands') {
-        response.locals.selectWeaponType = setSimpleSelect(data, 'weaponType')
-      }
-      response.locals.selectTier = setSimpleSelect(data, 'tier')
-      response.locals.selectZone = setSimpleSelect(data, 'zone')
+  try {
+    const data = JSON.parse(rawData)
 
-      response.render('layout', {
-        view: 'equipments',
-        title: page,
-        data,
-        csrfToken: request.csrfToken(),
-        count: data.length,
-        wikiUrl: `${wikiUrl + page}`,
-        equipment: page,
-      })
+    response.locals.selectType = setSimpleSelect(data, 'type')
+    if (page === 'mainhands') {
+      response.locals.selectWeaponType = setSimpleSelect(data, 'weaponType')
+    }
+    response.locals.selectTier = setSimpleSelect(data, 'tier')
+    response.locals.selectZone = setSimpleSelect(data, 'zone')
+
+    response.render('layout', {
+      view: 'equipments',
+      title: page,
+      data,
+      csrfToken: request.csrfToken(),
+      count: data.length,
+      wikiUrl: `${wikiUrl + page}`,
+      equipment: page,
     })
-    .catch(error => console.log(error))
+  }
+  catch (error) {
+    console.error(error)
+  }
 }
 
 const displayMounts = async (request, response, page) => {
-  await fs.promises.readFile(`data/${page}.json`, 'utf8')
-    .then((rawData) => {
-      const data = JSON.parse(rawData)
+  const rawData = await fs.promises.readFile(`data/${page}.json`, 'utf8')
 
-      response.locals.selectType = setSimpleSelect(data, 'type')
+  try {
+    const data = JSON.parse(rawData)
 
-      response.render('layout', {
-        view: page,
-        title: page,
-        data,
-        csrfToken: request.csrfToken(),
-        count: data.length,
-        wikiUrl: `${wikiUrl + page}`,
-      })
+    response.locals.selectType = setSimpleSelect(data, 'type')
+
+    response.render('layout', {
+      view: page,
+      title: page,
+      data,
+      csrfToken: request.csrfToken(),
+      count: data.length,
+      wikiUrl: `${wikiUrl + page}`,
     })
-    .catch(error => console.log(error))
+  }
+  catch (error) {
+    console.error(error)
+  }
 }
 
 router.get('/', (request, response) => {
@@ -176,7 +186,7 @@ router.get('/fusions', (request, response) => {
 })
 
 router.get('/equipments/:equipment(mainhands|offhands|heads|bodies|necklaces|rings)', (request, response) => {
-  displayEquipments(request, response, request.params.equipment)
+  displayEquipments(request, response)
 })
 
 router.get('/mounts', (request, response) => {
