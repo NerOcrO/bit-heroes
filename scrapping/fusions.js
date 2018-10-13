@@ -6,7 +6,11 @@ const setPassiveAbility = (rowAbilities) => {
   const abilities = rowAbilities.split(',')
 
   return abilities.map((rawAbility) => {
-    const [, pourcentage, ability] = rawAbility.match(/^ ?([0-9.]*%) ([\w .%-]*)/)
+    // Different matches:
+    // "15% Damage Reduction"
+    // "Upon death"
+    // " revive all fallen teammates with a moderate amount of health"
+    const [, pourcentage = '0%', ability] = rawAbility.match(/^ ?([0-9.]*%)? ?([\w .%-]*)/)
 
     return {
       pourcentage,

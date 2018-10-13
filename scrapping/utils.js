@@ -12,6 +12,7 @@ export const equipmentUpgrades = {
     6: [48],
     7: [64],
     8: [85],
+    9: [112],
   },
   Rare: {
     1: [16, 20],
@@ -22,6 +23,7 @@ export const equipmentUpgrades = {
     6: [72, 90],
     7: [96, 120],
     8: [128, 160],
+    9: [171, 213],
   },
   Epic: {
     1: [21, 27, 32],
@@ -32,6 +34,7 @@ export const equipmentUpgrades = {
     6: [96, 120, 144],
     7: [128, 160, 192],
     8: [171, 213, 256],
+    9: [229, 287, 344],
   },
   Legendary: {
     4: [67, 83, 100, 117],
@@ -39,19 +42,23 @@ export const equipmentUpgrades = {
     6: [120, 150, 180, 210],
     7: [160, 200, 240, 280],
     8: [213, 267, 320, 373],
+    9: [288, 360, 432, 504],
   },
   Set: {
     5: [91, 113, 136, 159],
     6: [120, 150, 180, 210],
     7: [160, 200, 240, 280],
     8: [213, 267, 320, 373],
+    9: [288, 360, 432, 504],
   },
   Mythic: {
     7: [160, 200, 240, 280],
     8: [213, 267, 320, 373],
+    9: [288, 360, 432, 504],
   },
   Ancient: {
     8: [213, 267, 320, 373],
+    9: [288, 360, 432, 504],
   },
 }
 
@@ -63,13 +70,20 @@ export const equipmentUpgrades = {
  *   Base64 of image.
  */
 export const getAvatarBase64 = async (url) => {
-  const response = await fetch(url)
-
   try {
-    const blob = await response.blob()
-    const symbols = Object.getOwnPropertySymbols(blob)
+    let base64 = ''
 
-    return `data:image/png;base64,${blob[symbols[1]].toString('base64')}`
+    if (url) {
+      const response = await fetch(url)
+      const blob = await response.blob()
+      const symbols = Object.getOwnPropertySymbols(blob)
+      base64 = `data:image/png;base64,${blob[symbols[1]].toString('base64')}`
+    }
+    else {
+      base64 = '/question.png'
+    }
+
+    return base64
   }
   catch (error) {
     console.error(error)
