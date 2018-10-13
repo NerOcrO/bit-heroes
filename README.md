@@ -6,7 +6,7 @@
 
 ## Make data
 
-* npm run scrapping familiars fusions mounts mainhands offhands bodies necklaces rings && npm run scrapping schematics
+* npm run scrapping familiars fusions mounts mainhands offhands bodies heads necklaces rings && npm run scrapping schematics
 
 ## Use data
 
