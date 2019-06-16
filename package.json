@@ -3,16 +3,6 @@
   "version": "1.0.0",
   "description": "Bit Heroes data",
   "main": "src/index.js",
-  "scripts": {
-    "scrapping": "node -r babel-register scrapping/index.js",
-    "build_js": "babel src/javascripts --out-file public/script.js --source-maps",
-    "build_css": "cleancss -o public/style.css src/css/* --source-map",
-    "build": "rm -rf public && mkdir public && npm run build_js && npm run build_css",
-    "watch_js": "npm run build_js -- -w",
-    "watch_css": "watch -n 0.5 -x npm run build_css",
-    "dev": "npm run build && DEBUG=bit-heroes nodemon -- src/index.js",
-    "start": "npm run build && node -r babel-register src/index.js"
-  },
   "keywords": [],
   "author": "NerOcrO",
   "license": "MIT",
@@ -20,11 +10,17 @@
     "node": ">=10.0.0",
     "npm": ">=3.8.6"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NerOcrO/bit-heroes"
+  },
   "dependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/node": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/register": "^7.4.4",
     "babel-preset-minify": "^0.5.0",
-    "babel-register": "^6.26.0",
     "body-parser": "^1.19.0",
     "cheerio": "^1.0.0-rc.3",
     "clean-css-cli": "^4.3.0",
@@ -44,8 +40,14 @@
     "eslint-plugin-import": "^2.17.3",
     "nodemon": "^1.19.1"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/NerOcrO/bit-heroes"
+  "scripts": {
+    "scrapping": "node -r @babel/register scrapping/index.js",
+    "build_js": "babel src/javascripts --out-file public/script.js --source-maps",
+    "build_css": "cleancss -o public/style.css src/css/* --source-map",
+    "build": "rm -rf public && mkdir public && npm run build_js && npm run build_css",
+    "watch_js": "npm run build_js -- -w",
+    "watch_css": "watch -n 0.5 -x npm run build_css",
+    "dev": "npm run build && DEBUG=bit-heroes nodemon -- src/index.js",
+    "start": "npm run build && node -r @babel/register src/index.js"
   }
 }
