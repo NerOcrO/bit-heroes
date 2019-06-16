@@ -23,26 +23,26 @@
   "dependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
-    "babel-preset-minify": "^0.4.3",
+    "babel-preset-minify": "^0.5.0",
     "babel-register": "^6.26.0",
-    "body-parser": "^1.18.3",
-    "cheerio": "^1.0.0-rc.2",
-    "clean-css-cli": "^4.2.1",
-    "compression": "^1.7.3",
+    "body-parser": "^1.19.0",
+    "cheerio": "^1.0.0-rc.3",
+    "clean-css-cli": "^4.3.0",
+    "compression": "^1.7.4",
     "cookie-parser": "^1.4.4",
-    "csurf": "^1.9.0",
-    "debug": "^3.2.6",
-    "ejs": "^2.6.1",
-    "express": "^4.16.4",
-    "express-session": "^1.15.6",
-    "helmet": "^3.15.1",
-    "node-fetch": "^2.3.0"
+    "csurf": "^1.10.0",
+    "debug": "^4.1.1",
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
+    "express-session": "^1.16.2",
+    "helmet": "^3.18.0",
+    "node-fetch": "^2.6.0"
   },
   "devDependencies": {
-    "eslint": "^4.19.1",
+    "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",
-    "eslint-plugin-import": "^2.16.0",
-    "nodemon": "^1.18.10"
+    "eslint-plugin-import": "^2.17.3",
+    "nodemon": "^1.19.1"
   },
   "repository": {
     "type": "git",
