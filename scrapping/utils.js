@@ -35,6 +35,7 @@ export const equipmentUpgrades = {
     7: [128, 160, 192],
     8: [171, 213, 256],
     9: [229, 287, 344],
+    10: [307, 306, 307],
   },
   Legendary: {
     4: [67, 83, 100, 117],
@@ -43,6 +44,7 @@ export const equipmentUpgrades = {
     7: [160, 200, 240, 280],
     8: [213, 267, 320, 373],
     9: [288, 360, 432, 504],
+    10: [384, 384, 384],
   },
   Set: {
     5: [91, 113, 136, 159],
@@ -50,6 +52,7 @@ export const equipmentUpgrades = {
     7: [160, 200, 240, 280],
     8: [213, 267, 320, 373],
     9: [288, 360, 432, 504],
+    10: [384, 384, 384, 384],
   },
   Mythic: {
     7: [160, 200, 240, 280],
@@ -59,6 +62,7 @@ export const equipmentUpgrades = {
   Ancient: {
     8: [213, 267, 320, 373],
     9: [288, 360, 432, 504],
+    10: [384, 384, 384, 384],
   },
 }
 
@@ -178,17 +182,24 @@ export const setEquipmentTier = (zone) => {
   if (zone === 'Starter') {
     return 1
   }
+
   if (zone[0] === 'R') {
     return Number(zone[1]) + 3
   }
 
   if (zone[0] === 'Z' || zone[0] === 'T') {
+    if (zone[2] === '0') {
+      return `${Number(zone[1])}${Number(zone[2])}`
+    }
+
     return Number(zone[1])
   }
 
   if (zone === 'Booster Pack') {
     return 2
   }
+
+  return null
 }
 
 /**
@@ -205,6 +216,7 @@ export const setEquipmentTier = (zone) => {
 export const setEquipment = async (firstRow, secondRow, equipmentType = null) => {
   const avatar = await getAvatarBase64(firstRow.find('span img').attr('data-src'))
   const type = getType(firstRow.find('td'))
+  const name = getText(firstRow, 2).replace('*', '')
   const zone = getText(secondRow, 1)
   const power = getText(firstRow, equipmentType === 'mainhands' ? 4 : 3)
   const stamina = getText(firstRow, equipmentType === 'mainhands' ? 5 : 4)
@@ -214,7 +226,7 @@ export const setEquipment = async (firstRow, secondRow, equipmentType = null) =>
   const data = {
     type,
     avatar,
-    name: getText(firstRow, 2).replace('*', ''),
+    name,
     zone,
     power,
     stamina,
