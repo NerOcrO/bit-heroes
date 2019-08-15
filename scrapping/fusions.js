@@ -36,7 +36,7 @@ const setFamiliar = async (firstRow, secondRow, thirdRow) => {
     type: utils.getType(firstRow.find('td')),
     avatar,
     name: utils.getText(firstRow, 2),
-    fusion: {},
+    fusion: [],
     passiveAbility: setPassiveAbility(utils.getText(secondRow, 1)),
     power: utils.getText(firstRow, 4).slice(0, -1),
     stamina: utils.getText(secondRow, 3).slice(0, -1),

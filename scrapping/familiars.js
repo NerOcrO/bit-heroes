@@ -23,8 +23,8 @@ export const urlWiki = 'http://bit-heroes.wikia.com/wiki/Familiar'
 export const scrapping = async (html) => {
   const $ = cheerio.load(html)
   const familiars = []
-  const excludeUselessTr = (index, element) => (index < 7 || $(element).children().length === 1 ? $(element) : null)
-  const tr = $('article tr').not(excludeUselessTr)
+  const uselessTr = (index, element) => (index < 6 || $(element).children().length === 1 ? $(element) : null)
+  const tr = $('article tr').not(uselessTr)
 
   for (let index = 0; index < tr.length; index += 3) {
     familiars.push(setFamiliar($(tr[index]), $(tr[index + 1]), $(tr[index + 2])))
