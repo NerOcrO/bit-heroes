@@ -14,7 +14,7 @@ const setFamiliar = async (firstRow, secondRow, thirdRow) => {
     stamina: utils.getText(secondRow, 2).slice(0, -1),
     agility: utils.getText(thirdRow, 3).slice(0, -1),
     attack: utils.setSkill(firstRow, secondRow, thirdRow, 5),
-    skills: utils.setSkills([6, 7, 8, 9], firstRow, secondRow, thirdRow),
+    skills: utils.setSkills([6, 7, 8, 9, 10], firstRow, secondRow, thirdRow),
   }
 }
 
