@@ -4,7 +4,7 @@
 ![npm version](https://img.shields.io/badge/npm-&#10878;3.8.6-green.svg)
 ![ISC license](https://img.shields.io/badge/licence-MIT-blue.svg)
 
-Sorry but this repo is no maintened anymore, just security fixes.
+**Sorry but this repo is no maintened anymore, just security fixes.**
 
 ## Make data
 
