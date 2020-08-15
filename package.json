@@ -17,38 +17,37 @@
   "dependencies": {
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
-    "@babel/node": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/register": "^7.5.5",
     "babel-preset-minify": "^0.5.0",
     "body-parser": "^1.19.0",
     "cheerio": "^0.22.0",
-    "clean-css-cli": "^4.3.0",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.4",
     "csurf": "^1.10.0",
     "debug": "^4.1.1",
     "ejs": "^2.6.2",
-    "eslint-config-airbnb-base": "^13.2.0",
     "express": "^4.17.1",
     "express-session": "^1.16.2",
-    "helmet": "^3.20.0",
+    "helmet": "^3.23.0",
     "node-fetch": "^2.6.0"
   },
   "devDependencies": {
+    "@babel/node": "^7.5.5",
+    "clean-css-cli": "^4.3.0",
     "eslint": "^6.1.0",
-    "eslint-config-airbnb": "^17.1.1",
+    "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
-    "nodemon": "^1.19.1"
+    "nodemon": "^2.0.4"
   },
   "scripts": {
-    "scrapping": "node -r @babel/register scrapping/index.js",
-    "build_js": "babel src/javascripts --out-file public/script.js --source-maps",
-    "build_css": "cleancss -o public/style.css src/css/* --source-map",
-    "build": "rm -rf public && mkdir public && npm run build_js && npm run build_css",
-    "watch_js": "npm run build_js -- -w",
-    "watch_css": "watch -n 0.5 -x npm run build_css",
+    "build": "rm -rf public && mkdir public && npm run build_css && npm run build_js",
+    "build_css": "cleancss -o public/style.css src/css/*",
+    "build_js": "babel src/javascripts --out-file public/script.js",
     "dev": "npm run build && DEBUG=bit-heroes nodemon -- src/index.js",
-    "start": "npm run build && node -r @babel/register src/index.js"
+    "scrapping": "node -r @babel/register scrapping/index.js",
+    "start": "node -r @babel/register src/index.js",
+    "watch_css": "watch -n 0.5 -x npm run build_css",
+    "watch_js": "npm run build_js -- -w --source-maps"
   }
 }
